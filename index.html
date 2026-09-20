@@ -1,0 +1,1276 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>คู่มือฉบับคนขับ City e:HEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#F4F5F3;
+  --surface:#FFFFFF;
+  --surface-2:#ECEEEB;
+  --ink:#15181B;
+  --ink-2:#4B525A;
+  --ink-3:#7C848D;
+  --line:#DCDFDB;
+  --line-strong:#C3C8C2;
+  --accent:#12508F;
+  --accent-ink:#0E3F73;
+  --accent-wash:#E4EDF7;
+  --lamp-red:#C1272D;
+  --lamp-amber:#A96A08;
+  --lamp-green:#14764C;
+  --lamp-grey:#8A9097;
+  --warn-bg:#FBF0EE;
+  --warn-line:#E4BDB8;
+
+  --f-display:"Bai Jamjuree","IBM Plex Sans Thai","Noto Sans Thai","Sukhumvit Set",Thonburi,system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai","Noto Sans Thai","Sukhumvit Set",Thonburi,system-ui,sans-serif;
+  /* ตัวเลข/อักษรละตินเท่านั้น — มี Thai ต่อท้ายกันวรรณยุกต์เพี้ยนถ้าเผลอมีไทยปน */
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"IBM Plex Sans Thai","Sukhumvit Set",Thonburi,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619;
+    --surface:#1B1F23;
+    --surface-2:#22272C;
+    --ink:#E8EBEC;
+    --ink-2:#AEB6BC;
+    --ink-3:#7F888F;
+    --line:#2C3238;
+    --line-strong:#3D444B;
+    --accent:#6FAAE6;
+    --accent-ink:#9CC6F0;
+    --accent-wash:#1C2A38;
+    --lamp-red:#F0736F;
+    --lamp-amber:#E0A44F;
+    --lamp-green:#5CC191;
+    --lamp-grey:#8A9097;
+    --warn-bg:#2A1E1E;
+    --warn-line:#4D3330;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619;
+  --surface:#1B1F23;
+  --surface-2:#22272C;
+  --ink:#E8EBEC;
+  --ink-2:#AEB6BC;
+  --ink-3:#7F888F;
+  --line:#2C3238;
+  --line-strong:#3D444B;
+  --accent:#6FAAE6;
+  --accent-ink:#9CC6F0;
+  --accent-wash:#1C2A38;
+  --lamp-red:#F0736F;
+  --lamp-amber:#E0A44F;
+  --lamp-green:#5CC191;
+  --lamp-grey:#8A9097;
+  --warn-bg:#2A1E1E;
+  --warn-line:#4D3330;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:15.5px;
+  line-height:1.72;
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.3}
+p{margin:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky;
+  top:env(safe-area-inset-top, 0px);
+  z-index:20;
+  background:color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{
+  max-width:1180px;margin:0 auto;
+  padding:10px 20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.mark{
+  font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:.01em;
+  display:flex;align-items:baseline;gap:8px;white-space:nowrap;
+}
+.mark small{font-family:var(--f-body);font-size:12px;color:var(--ink-3);font-weight:400}
+.search{flex:1 1 200px;display:flex;align-items:center;gap:8px;min-width:0}
+.search input{
+  width:100%;min-width:0;
+  font-family:var(--f-body);font-size:14px;color:var(--ink);
+  background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:7px;
+  padding:7px 11px;
+}
+.search input::placeholder{color:var(--ink-3)}
+.hitcount{font-family:var(--f-body);font-size:12px;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 20px 80px;display:flex;gap:44px;align-items:flex-start}
+nav.rail{
+  position:sticky;top:calc(env(safe-area-inset-top, 0px) + 62px);
+  flex:0 0 196px;padding-top:40px;
+}
+nav.rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+nav.rail a{
+  display:block;padding:5px 10px;border-left:2px solid var(--line);
+  color:var(--ink-2);text-decoration:none;font-size:13.5px;
+}
+nav.rail a:hover{color:var(--ink);border-left-color:var(--accent);background:var(--surface-2)}
+main{flex:1 1 auto;min-width:0;padding-top:40px}
+
+/* ---------- hero ---------- */
+.hero{margin-bottom:8px}
+.eyebrow{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+h1{font-size:clamp(27px,4.4vw,40px);font-weight:700;letter-spacing:-.01em;max-width:20ch}
+h1 .l{display:inline-block;white-space:nowrap}
+.lede{margin-top:14px;max-width:62ch;color:var(--ink-2);font-size:16px}
+.factstrip{
+  margin-top:26px;display:grid;gap:1px;background:var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+}
+.fact{background:var(--surface);padding:12px 14px}
+.fact dt{font-family:var(--f-body);font-size:12.5px;color:var(--ink-3)}
+.fact dd{margin:3px 0 0;font-family:var(--f-display);font-weight:600;font-size:17px;font-variant-numeric:tabular-nums}
+.fact dd span{font-size:12.5px;font-weight:500;color:var(--ink-2)}
+
+/* ---------- sections ---------- */
+section{padding-top:52px;scroll-margin-top:calc(env(safe-area-inset-top, 0px) + 70px)}
+.sechead{border-top:2px solid var(--ink);padding-top:12px;margin-bottom:22px}
+.sechead h2{font-size:clamp(20px,2.7vw,25px);font-weight:700}
+.src{
+  font-family:var(--f-body);font-size:13px;
+  color:var(--ink-3);margin-top:5px;
+}
+.stack{display:flex;flex-direction:column;gap:14px}
+
+/* item = searchable block */
+.item{
+  background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  padding:16px 18px;
+}
+.item h3{font-size:16px;font-weight:600;margin-bottom:7px}
+.item p{max-width:66ch;color:var(--ink-2)}
+.item p + p{margin-top:8px}
+.item strong{color:var(--ink);font-weight:600}
+
+/* plain rows, not everything is a card */
+.plain{border:0;background:none;padding:0 0 0 0;border-left:2px solid var(--line);padding-left:16px}
+.plain h3{margin-bottom:5px}
+
+ul.tick{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+ul.tick li{padding-left:17px;position:relative;color:var(--ink-2);max-width:66ch}
+ul.tick li::before{content:"";position:absolute;left:1px;top:.68em;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.55}
+ul.tick li strong{color:var(--ink)}
+
+ol.steps{margin:8px 0 0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
+ol.steps li{counter-increment:s;padding-left:30px;position:relative;color:var(--ink-2);max-width:64ch}
+ol.steps li::before{
+  content:counter(s);position:absolute;left:0;top:.18em;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--accent-wash);color:var(--accent-ink);
+  font-family:var(--f-mono);font-size:11px;font-weight:500;
+  display:grid;place-items:center;
+}
+ol.steps li strong{color:var(--ink)}
+
+.warn{
+  background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:7px;
+  padding:11px 14px;margin-top:12px;font-size:14.5px;color:var(--ink);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.warn b{font-family:var(--f-display);color:var(--lamp-red);font-weight:600;flex:0 0 auto}
+.warn span{max-width:62ch}
+
+.note{margin-top:10px;font-size:13.5px;color:var(--ink-3);max-width:64ch}
+
+/* key–value grid */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:7px 20px;margin-top:4px;font-size:14.5px}
+.kv dt{color:var(--ink-3)}
+.kv dd{margin:0;font-variant-numeric:tabular-nums}
+
+/* tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:var(--f-body);font-size:12.5px;font-weight:500;
+  color:var(--ink-3);background:var(--surface-2);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* lamp chip */
+.lamp{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:12.5px;color:var(--ink-2)}
+.lamp::before{content:"";width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.lamp.red::before{background:var(--lamp-red);box-shadow:0 0 0 3px color-mix(in srgb,var(--lamp-red) 18%,transparent)}
+.lamp.amber::before{background:var(--lamp-amber);box-shadow:0 0 0 3px color-mix(in srgb,var(--lamp-amber) 18%,transparent)}
+.lamp.green::before{background:var(--lamp-green);box-shadow:0 0 0 3px color-mix(in srgb,var(--lamp-green) 18%,transparent)}
+.lamp.grey::before{background:var(--lamp-grey)}
+
+.urgency{font-family:var(--f-display);font-weight:600;font-size:12.5px}
+.u-stop{color:var(--lamp-red)}
+.u-soon{color:var(--lamp-amber)}
+.u-ok{color:var(--lamp-green)}
+
+code,.mono{font-family:var(--f-mono);font-size:.9em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+
+.gearlist{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-top:4px}
+.gear{background:var(--surface);padding:12px 15px;display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start}
+.gearkey{
+  font-family:var(--f-display);font-weight:700;font-size:19px;color:var(--accent);
+  border:1.5px solid var(--accent);border-radius:6px;text-align:center;line-height:1.5;
+}
+.gear p{margin:0;font-size:14.5px;color:var(--ink-2)}
+.gear h4{font-size:14.5px;font-weight:600;margin-bottom:2px}
+
+.empty{display:none;color:var(--ink-3);padding:30px 0;font-size:15px}
+.is-hidden{display:none !important}
+
+footer{
+  margin-top:70px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--ink-3);max-width:66ch;
+}
+
+@media (max-width:900px){
+  .shell{flex-direction:column;gap:0;padding-bottom:60px}
+  nav.rail{
+    position:static;flex:none;width:100%;padding-top:16px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+  }
+  nav.rail ol{flex-direction:row;gap:7px;width:max-content;padding-bottom:4px}
+  nav.rail a{
+    border-left:0;border:1px solid var(--line);border-radius:999px;
+    padding:4px 12px;white-space:nowrap;background:var(--surface);font-size:13px;
+  }
+  main{padding-top:26px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="mark">City e:HEV <small>ฉบับคนขับ</small></div>
+    <div class="search">
+      <input id="q" type="search" placeholder="ค้นหา เช่น ไฟเตือน, ลมยาง, ยางแบน, ACC" aria-label="ค้นหาในคู่มือ" autocomplete="off">
+      <span class="hitcount" id="hits"></span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="สารบัญ">
+    <ol>
+      <li><a href="#ehev">ระบบ e:HEV</a></li>
+      <li><a href="#start">สตาร์ต ขับ จอด</a></li>
+      <li><a href="#brake">เบรก</a></li>
+      <li><a href="#lights">ไฟเตือนหน้าปัด</a></li>
+      <li><a href="#sensing">Honda SENSING</a></li>
+      <li><a href="#key">กุญแจ ประตู สวิตช์</a></li>
+      <li><a href="#care">ของเหลวและยาง</a></li>
+      <li><a href="#service">ตารางเข้าศูนย์</a></li>
+      <li><a href="#emergency">เหตุฉุกเฉิน</a></li>
+      <li><a href="#faq">คำถามที่เจอบ่อย</a></li>
+      <li><a href="#spec">ตัวเลขสำคัญ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Honda City Hatchback e:HEV</div>
+      <h1><span class="l">เรื่องที่คนขับควรรู้</span> <span class="l">ก่อนออกรถ</span></h1>
+      <p class="lede">สรุปจากคู่มือผู้ใช้รถ 578 หน้า เหลือเฉพาะสิ่งที่ต้องใช้จริงบนถนน ไฟเตือนที่ห้ามมองข้าม ระบบที่ควรเข้าใจ ตัวเลขที่ควรจำ และขั้นตอนเมื่อเกิดเหตุ ทุกหัวข้อกำกับหน้าอ้างอิงในคู่มือเล่มจริงไว้ให้</p>
+
+      <dl class="factstrip">
+        <div class="fact"><dt>น้ำมันที่ใช้</dt><dd>E20 <span>ออกเทน 91 ขึ้นไป</span></dd></div>
+        <div class="fact"><dt>ความจุถัง</dt><dd>40 <span>ลิตร</span></dd></div>
+        <div class="fact"><dt>น้ำมันเครื่อง</dt><dd>0W-20 <span>3.3 ลิตร พร้อมกรอง</span></dd></div>
+        <div class="fact"><dt>เข้าศูนย์ทุก</dt><dd>10,000 <span>กม. / 6 เดือน</span></dd></div>
+      </dl>
+    </div>
+
+    <!-- ============ 1 ============ -->
+    <section id="ehev">
+      <div class="sechead">
+        <h2>ระบบ e:HEV — สิ่งที่ต่างจากรถน้ำมันทั่วไป</h2>
+        <div class="src">แนะนำการใช้อย่างรวดเร็ว · คู่มือ น.11–18, 296</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="e:HEV โหมด EV HV Engine Drive มอเตอร์ เครื่องยนต์ ขับเคลื่อน">
+          <h3>รถสลับแหล่งพลังงานเองอัตโนมัติ 4 แบบ</h3>
+          <p>คุณไม่ต้องเลือกโหมดเอง ระบบเลือกให้ตลอดเวลา สิ่งที่ควรรู้คือ<strong>มันกำลังทำอะไรอยู่</strong> เมื่อดูหน้าจอแสดงการจ่ายพลังงาน</p>
+          <ul class="tick">
+            <li><strong>EV (ไฟฟ้าล้วน)</strong> — จอดนิ่งหรือคลานช้า มอเตอร์ขับล้อเพียงอย่างเดียว ไฟเตือนโหมด EV สว่าง</li>
+            <li><strong>Hybrid</strong> — โหลดสูง เช่น เร่งแซงหรือขึ้นทางชัน เครื่องยนต์ปั่นไฟป้อนมอเตอร์ ล้อยังขับด้วยมอเตอร์</li>
+            <li><strong>Engine Drive</strong> — วิ่งเร็วคงที่โหลดต่ำ เครื่องยนต์ต่อตรงเข้าล้อ ซึ่งเป็นช่วงที่ประหยัดที่สุด</li>
+            <li><strong>ชาร์จไฟกลับ</strong> — ถอนคันเร่งหรือแตะเบรก มอเตอร์กลายเป็นเครื่องปั่นไฟคืนเข้าแบตเตอรี่</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="เสียง เครื่องยนต์ ดับเอง สตาร์ตเอง auto stop ผิดปกติ">
+          <h3>เครื่องยนต์ดับเองและติดเองได้ ไม่ใช่อาการเสีย</h3>
+          <p>เครื่องยนต์เบนซินจะหยุดและสตาร์ตใหม่เองตลอดการใช้งาน รวมถึงขณะรถจอดนิ่ง คุณอาจได้ยินเสียงจากระบบส่งกำลัง ระบบน้ำมัน แอร์ และพัดลมระบายความร้อนแบตเตอรี่ที่ไม่คุ้นหู ซึ่งคู่มือระบุว่าเป็นเรื่องปกติ</p>
+          <p>แต่เครื่องยนต์<strong>จะไม่ดับเอง</strong>เมื่อ ต้องเร่งกะทันหัน ขึ้นเนิน วิ่งเร็ว ใช้แอร์หนัก แบตเตอรี่แรงสูงร้อนหรือเย็นเกินไป หรือไฟในแบตเตอรี่เหลือน้อย</p>
+        </div>
+
+        <div class="item" data-text="แบตเตอรี่แรงเคลื่อนไฟฟ้าสูง high voltage จอดนาน คายประจุ 30 นาที 3 เดือน">
+          <h3>จอดทิ้งไว้นาน แบตเตอรี่แรงสูงจะเสื่อม</h3>
+          <p>แบตเตอรี่แรงเคลื่อนไฟฟ้าสูงคายประจุเองแม้ไม่ใช้รถ ถ้าปล่อยให้ไฟต่ำเป็นเวลานานอายุการใช้งานจะสั้นลง และถ้าลดจนเกือบศูนย์จะ<strong>เปิดระบบไฟฟ้าไม่ได้เลย</strong></p>
+          <ul class="tick">
+            <li>นำรถออกไปขับอย่างน้อย <strong>30 นาที ทุก 3 เดือน</strong> เป็นอย่างต่ำ</li>
+            <li>หน้าร้อนควรจอดในร่ม ความร้อนจัดมีผลต่ออายุแบตเตอรี่</li>
+            <li>ห้ามปิดกั้นช่องรับอากาศเข้าของแบตเตอรี่ ไม่งั้นระบบจะจำกัดกระแสและไฟเตือนจะขึ้น</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ไฟฟ้าแรงสูง สายสีส้ม อุบัติเหตุ ช็อต ความปลอดภัย ดับเพลิง">
+          <h3>ความปลอดภัยไฟฟ้าแรงสูง</h3>
+          <ul class="tick">
+            <li><strong>ห้ามแตะสายไฟสีส้มหรือชิ้นส่วนไฟฟ้าแรงสูง</strong> การซ่อมบำรุงส่วนนี้ต้องทำที่ศูนย์บริการฮอนด้าเท่านั้น</li>
+            <li>หลังอุบัติเหตุชน ระบบตัดการทำงานฉุกเฉินจะปิดไฟฟ้าแรงสูงเอง รถจะวิ่งด้วยกำลังตัวเองไม่ได้ ต้องให้ศูนย์บริการปลดล็อกคืน</li>
+            <li>ถ้าน้ำยาอิเล็กโทรไลต์โดนผิวหนังหรือตา ให้ล้างด้วยน้ำปริมาณมากอย่างน้อย 5 นาที แล้วพบแพทย์ทันที</li>
+            <li>ไฟจากอุปกรณ์ไฟฟ้าต้องใช้ถังดับเพลิงชนิดที่ถูกต้อง ห้ามฉีดน้ำปริมาณน้อยใส่</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 2 ============ -->
+    <section id="start">
+      <div class="sechead">
+        <h2>สตาร์ต ขับ และจอด</h2>
+        <div class="src">การขับรถ · คู่มือ น.266–296, 389</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="สตาร์ต POWER READY ปุ่มพาวเวอร์ เริ่มขับ">
+          <h3>สตาร์ตรถ — ต้องรอไฟ READY</h3>
+          <ol class="steps">
+            <li>ตรวจว่าเข้าเบรกมือแล้ว และคันเกียร์อยู่ตำแหน่ง <span class="mono">P</span></li>
+            <li>เหยียบแป้นเบรกค้างไว้ด้วยเท้าขวา <strong>ไม่ต้องแตะคันเร่ง</strong></li>
+            <li>กดปุ่ม <span class="mono">POWER</span> หนึ่งครั้ง ไม่ต้องกดค้าง</li>
+            <li>เหยียบเบรกค้างจนกว่า <strong>ไฟ READY สว่าง</strong> จึงจะออกรถได้</li>
+          </ol>
+          <div class="warn"><b>ระวัง</b><span>รถไฮบริดไม่มีเสียงและแรงสั่นของเครื่องยนต์ให้รู้สึก อาจเข้าใจผิดว่ายังไม่ติด ให้ยึดไฟ READY เป็นตัวตัดสินเสมอ</span></div>
+          <p class="note">ถ้าระบบไม่เปิด ให้รออย่างน้อย 30 วินาทีแล้วลองใหม่ · อากาศเย็นจัดมาก ไฟ READY จะไม่ติดจนกว่าอุณหภูมิจะสูงขึ้น</p>
+        </div>
+
+        <div class="item" data-text="เกียร์ P R N D B ตำแหน่งเกียร์ ปุ่มปลดล็อก ลงเนิน">
+          <h3>ตำแหน่งเกียร์ และตำแหน่ง B ที่หลายคนไม่ได้ใช้</h3>
+          <div class="gearlist">
+            <div class="gear"><div class="gearkey">P</div><div><h4>เกียร์จอด</h4><p>ใช้ตอนจอด และตอนเปิด/ปิดระบบไฟฟ้า ถ้าไม่อยู่ที่ P จะเปลี่ยนจาก ON เป็น VEHICLE OFF ไม่ได้</p></div></div>
+            <div class="gear"><div class="gearkey">R</div><div><h4>ถอยหลัง</h4><p>ต้องจอดสนิทและเหยียบเบรกก่อนสลับระหว่าง R กับ D ไม่งั้นระบบเกียร์เสียหายได้</p></div></div>
+            <div class="gear"><div class="gearkey">N</div><div><h4>เกียร์ว่าง</h4><p>ห้ามใช้ขณะขับ จะเสียการชาร์จไฟกลับและการเร่ง เหยียบคันเร่งค้างที่ N จะมีเสียงเตือน</p></div></div>
+            <div class="gear"><div class="gearkey">D</div><div><h4>ขับปกติ</h4><p>ใช้แพดเดิลชะลอความเร็วได้ แต่ระดับที่ตั้งจะ<strong>ยกเลิกเองอัตโนมัติ</strong>เมื่อความเร็วคงที่</p></div></div>
+            <div class="gear"><div class="gearkey">B</div><div><h4>ลงเนินยาว</h4><p>เพิ่มประสิทธิภาพชาร์จไฟกลับ และระดับการชะลอที่ตั้งด้วยแพดเดิล<strong>จะค้างไว้</strong> มีตัว M ขึ้นบนมาตรวัด</p></div></div>
+          </div>
+        </div>
+
+        <div class="item" data-text="แพดเดิล paddle ชะลอความเร็ว deceleration selector 3 ระดับ ก้านสวิตช์">
+          <h3>แพดเดิลชะลอความเร็ว — ปรับได้ 3 ระดับ</h3>
+          <p>เมื่อถอนเท้าจากคันเร่ง คุณควบคุมแรงหน่วงได้โดยไม่ต้องละมือจากพวงมาลัย ใช้แทนการแตะเบรกตอนลงเนินหรือตามรถคันหน้า</p>
+          <ul class="tick">
+            <li><strong>ก้านซ้าย (−)</strong> ดึงเข้าหาตัว = เพิ่มระดับการชะลอ</li>
+            <li><strong>ก้านขวา (+)</strong> ดึงเข้าหาตัว = ลดระดับการชะลอ</li>
+            <li>ดึงก้านขวาค้าง <strong>2–3 วินาที</strong> = ยกเลิกการทำงาน</li>
+            <li>ถ้าดึงขณะใช้ ACC อยู่ ระบบ ACC จะถูกยกเลิกอัตโนมัติ</li>
+          </ul>
+          <p class="note">ระดับอาจไม่เปลี่ยนและไอคอนจะกะพริบ เมื่อแบตเตอรี่แรงสูงเต็มแล้ว หรืออุณหภูมิแบตเตอรี่สูง/ต่ำเกินไป</p>
+          <div class="warn"><b>ระวัง</b><span>ถนนลื่นแล้วเพิ่มระดับการชะลอแบบฉับพลัน ยางอาจลื่นไถลได้ ให้ค่อยๆ เพิ่มทีละระดับ</span></div>
+        </div>
+
+        <div class="item" data-text="ECON โหมดประหยัด ประหยัดน้ำมัน">
+          <h3>โหมด ECON</h3>
+          <p>กดสวิตช์ ECON เพื่อจำกัดกำลังขับเคลื่อนและลดการทำงานของแอร์ รถจะเร่งช้าลงแต่ประหยัดขึ้น ไฟเตือน ECON บนมาตรวัดจะสว่างเมื่อเปิดอยู่</p>
+        </div>
+
+        <div class="item" data-text="VSA ระบบทรงตัว traction control ปิด VSA OFF ติดหล่ม">
+          <h3>VSA — เปิดอัตโนมัติทุกครั้ง และควรเปิดไว้</h3>
+          <p>ระบบช่วยควบคุมการทรงตัวจะเปิดเองทุกครั้งที่เปิดระบบไฟฟ้า แม้ครั้งก่อนคุณจะปิดไว้ก็ตาม</p>
+          <p><strong>กรณีเดียวที่ควรปิด</strong> คือรถติดหล่มโคลนหรือหิมะ การปิด VSA ชั่วคราว (กดปุ่ม VSA OFF ค้างจนได้ยินเสียงบี๊บ) จะช่วยให้ล้อหมุนฟรีออกจากหล่มได้ง่ายขึ้น เมื่อหลุดแล้วให้เปิดกลับทันที</p>
+        </div>
+
+        <div class="item" data-text="ระบบช่วยออกตัวทางชัน hill start assist เนิน">
+          <h3>ระบบช่วยออกตัวขณะขึ้นทางชัน</h3>
+          <p>รักษาแรงเบรกไว้ครู่หนึ่งขณะคุณย้ายเท้าจากเบรกไปคันเร่ง ทำงานแม้ปิด VSA อยู่ แต่<strong>ไม่สามารถแทนเบรกมือ</strong> และอาจเอาไม่อยู่บนทางชันมากหรือลื่นมาก</p>
+        </div>
+
+        <div class="item" data-text="จอดรถ parking ขั้นตอนจอด เบรกมือ ดับเครื่อง">
+          <h3>ขั้นตอนจอดรถให้ถูก</h3>
+          <ol class="steps">
+            <li>เหยียบแป้นเบรกจนสุด</li>
+            <li>คงเบรกไว้ แล้วดึงสวิตช์เบรกมือไฟฟ้าขึ้นช้าๆ จนสุด</li>
+            <li>เปลี่ยนเกียร์ไปที่ <span class="mono">P</span> โดยเหยียบเบรกค้างจนเห็น P บนมาตรวัด</li>
+            <li>กดปุ่ม <span class="mono">POWER</span> ปิดระบบไฟฟ้า</li>
+          </ol>
+          <div class="warn"><b>ห้าม</b><span>เหยียบคันเร่งและเบรกพร้อมกัน หรือเข้าเกียร์ R ก่อนรถหยุดสนิท ทั้งสองอย่างทำให้ระบบขับเคลื่อนเสียหาย · เมื่อรถหันขึ้นเนิน ห้ามใช้คันเร่งเลี้ยงรถไว้กับที่ ระบบจ่ายไฟจะร้อนจัด</span></div>
+        </div>
+
+        <div class="item" data-text="ขับใหม่ รันอิน 1000 กม 300 กม ผ้าเบรก">
+          <h3>ช่วงรันอินรถใหม่</h3>
+          <ul class="tick">
+            <li><strong>1,000 กม. แรก</strong> — เลี่ยงการเร่งกะทันหันหรือเร่งเต็มที่ ป้องกันระบบไฟฟ้าและระบบส่งกำลังเสียหาย</li>
+            <li><strong>300 กม. แรก</strong> หลังรถใหม่หรือหลังเปลี่ยนผ้าเบรก/จานเบรก — เลี่ยงการเบรกรุนแรง</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ฝนตก น้ำท่วม เหินน้ำ หมอก ลมแรง ลุยน้ำ">
+          <h3>สภาพถนนที่ต้องระวังเป็นพิเศษ</h3>
+          <ul class="tick">
+            <li><strong>ห้ามลุยน้ำท่วมสูง</strong> — คู่มือระบุชัดว่าทำให้เครื่องยนต์และอุปกรณ์ไฟฟ้าเสียหายจนรถใช้งานไม่ได้</li>
+            <li><strong>หลังลุยน้ำ</strong> ให้แตะเบรกเบาๆ หลายครั้งเพื่อไล่น้ำออกจากเบรก</li>
+            <li><strong>หมอกจัด</strong> — เปิดไฟต่ำแม้กลางวัน</li>
+            <li><strong>ลมกระโชก</strong> — ระวังตอนออกจากอุโมงค์ ขึ้นสะพาน และตอนรถบรรทุกใหญ่แล่นผ่าน</li>
+            <li><strong>หมุนพวงมาลัยสุดค้างไว้นานๆ</strong> ที่ความเร็วต่ำ ระบบ EPS จะร้อนและเข้าโหมดป้องกัน พวงมาลัยจะหนักขึ้นเรื่อยๆ</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 3 ============ -->
+    <section id="brake">
+      <div class="sechead">
+        <h2>เบรกและระบบช่วยเบรก</h2>
+        <div class="src">การเบรก · คู่มือ น.374–388</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="เบรกมือไฟฟ้า EPB electric parking brake ปลดอัตโนมัติ">
+          <h3>เบรกมือไฟฟ้า (EPB)</h3>
+          <ul class="tick">
+            <li><strong>เข้าเบรก</strong> — ดึงสวิตช์ขึ้นเบาๆ ทำได้ทุกโหมดจ่ายไฟ ขอแค่มีไฟจากแบตเตอรี่ 12 โวลต์</li>
+            <li><strong>ปลดด้วยมือ</strong> — โหมดต้องอยู่ที่ ON เหยียบเบรกแล้วกดสวิตช์ลง วิธีนี้ทำให้ออกตัวลงเนินได้นุ่มนวลกว่า</li>
+            <li><strong>ปลดอัตโนมัติ</strong> — แค่ค่อยๆ เหยียบคันเร่ง ถ้าอยู่บนเนินอาจต้องเหยียบลึกกว่าปกติ</li>
+            <li><strong>ดึงสวิตช์ค้างขณะรถวิ่ง</strong> — เบรกทั้งสี่ล้อจะทำงานจนรถหยุดสนิท ใช้เป็นเบรกฉุกเฉินได้</li>
+          </ul>
+          <p class="note">ปลดอัตโนมัติจะทำงานก็ต่อเมื่อ คาดเข็มขัดนิรภัยฝั่งคนขับ ระบบไฟฟ้าทำงานอยู่ และเกียร์ไม่ได้อยู่ที่ P หรือ N</p>
+          <div class="warn"><b>ระวัง</b><span>แบตเตอรี่ 12 โวลต์หมด = เข้าหรือปลดเบรกมือไม่ได้เลย · ถ้าใช้เบรกมือไฟฟ้าซ้ำๆ ถี่ๆ ระบบจะหยุดทำงานกันร้อนและไฟเตือนกะพริบ ราว 1 นาทีจะกลับเป็นปกติ</span></div>
+        </div>
+
+        <div class="item" data-text="เบรกมืออัตโนมัติ auto parking brake เปิดปิด ล้างรถ ลากรถ">
+          <h3>เปิด/ปิดฟังก์ชันเบรกมืออัตโนมัติ</h3>
+          <p>เมื่อเปิดไว้ รถจะเข้าเบรกมือให้เองทุกครั้งที่คุณปรับโหมดเป็น VEHICLE OFF</p>
+          <ol class="steps">
+            <li>โหมดจ่ายไฟอยู่ที่ ON และเข้าเกียร์ <span class="mono">P</span></li>
+            <li>ดึงสวิตช์เบรกมือขึ้น<strong>โดยไม่เหยียบเบรก</strong> ตรวจว่าไฟเตือนสีแดงติด</li>
+            <li>ดึงสวิตช์ค้าง พอได้ยินบี๊บ 1 ครั้งให้ปล่อย แล้วภายใน 3 วินาทีดึงค้างอีกครั้ง</li>
+            <li>บี๊บ 2 ครั้ง = เปิดใช้งาน · บี๊บ 1 ครั้ง = ปิดใช้งาน</li>
+          </ol>
+          <p class="note"><strong>ควรปิดฟังก์ชันนี้</strong> ก่อนเข้าเครื่องล้างรถแบบสายพาน และก่อนให้รถถูกลากจูง</p>
+        </div>
+
+        <div class="item" data-text="auto brake hold เบรกอัตโนมัติ รถติด ไฟแดง">
+          <h3>Auto Brake Hold — ค้างเบรกไว้ให้เอง</h3>
+          <p>รักษาแรงเบรกไว้หลังคุณยกเท้า จนกว่าจะเหยียบคันเร่ง เหมาะกับรอไฟแดงและรถติด <strong>คงแรงเบรกไว้ได้ไม่เกิน 10 นาที</strong></p>
+          <ul class="tick">
+            <li><strong>เปิดระบบ</strong> — คาดเข็มขัด เปิดระบบไฟฟ้า แล้วกดปุ่มเบรกอัตโนมัติ</li>
+            <li><strong>ให้ค้าง</strong> — เหยียบเบรกจนหยุดสนิท เกียร์ไม่ใช่ P หรือ N รอจนไฟเตือนติดแล้วค่อยยกเท้า</li>
+            <li><strong>ระบบจะเข้าเบรกมือให้เอง</strong> เมื่อค้างเกิน 10 นาที ปลดเข็มขัดคนขับ หรือปิดระบบไฟฟ้า</li>
+          </ul>
+          <div class="warn"><b>ห้าม</b><span>จอดทิ้งรถโดยพึ่ง Auto Brake Hold และห้ามใช้บนทางชันสูงหรือถนนลื่น รถอาจไหลได้ จอดต้องเข้าเกียร์ P และใช้เบรกมือเสมอ · ต้องปิดระบบนี้ก่อนเข้าเครื่องล้างรถอัตโนมัติ</span></div>
+        </div>
+
+        <div class="item" data-text="ABS แป้นเบรกสั่น ย้ำเบรก brake assist">
+          <h3>ABS และระบบเสริมแรงเบรก</h3>
+          <ul class="tick">
+            <li>เมื่อ ABS ทำงาน <strong>แป้นเบรกจะสั่น มีเสียงมอเตอร์</strong> นี่คืออาการปกติ</li>
+            <li><strong>ห้ามย้ำเบรก</strong> ให้เหยียบค้างด้วยแรงสม่ำเสมอแล้วหมุนพวงมาลัยหลบ</li>
+            <li>ABS หยุดทำงานเมื่อความเร็วต่ำกว่า 10 กม./ชม.</li>
+            <li>ABS ไม่ได้ทำให้ระยะเบรกสั้นลง บนกรวดหรือหิมะอาจใช้ระยะมากกว่ารถไม่มี ABS ด้วยซ้ำ</li>
+            <li>ถ้าไฟเตือน ABS ติดค้าง เบรกยังใช้ได้ปกติ แต่<strong>ไม่มีระบบป้องกันล้อล็อก</strong> ให้เข้าศูนย์</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ไฟฉุกเฉินอัตโนมัติ เบรกกะทันหัน 60 กม emergency stop signal">
+          <h3>สัญญาณไฟฉุกเฉินอัตโนมัติเมื่อเบรกกะทันหัน</h3>
+          <p>เมื่อคุณเบรกรุนแรงที่ความเร็ว <strong>60 กม./ชม. ขึ้นไป</strong> ไฟฉุกเฉินจะกะพริบถี่เองเพื่อเตือนรถที่ตามมา และหยุดกะพริบเมื่อปล่อยเบรกหรือชะลอกลับสู่ระดับปกติ</p>
+        </div>
+
+        <div class="item" data-text="ผ้าเบรก เสียงหวีด เสียงเสียดสีโลหะ เบรกลงเนิน เบรกไหม้">
+          <h3>สัญญาณว่าเบรกมีปัญหา</h3>
+          <ul class="tick">
+            <li><strong>ได้ยินเสียงหวีดหรือเสียงเสียดสีโลหะต่อเนื่อง</strong> เมื่อเบรก = ถึงเวลาเปลี่ยนผ้าเบรก ให้เข้าศูนย์</li>
+            <li><strong>ห้ามวางเท้าแช่บนแป้นเบรก</strong>ขณะขับ เบรกจะเสื่อมเร็วและผ้าเบรกหมดไว</li>
+            <li><strong>ลงเนินยาว</strong> อย่าเหยียบเบรกตลอด เบรกจะร้อนจัดจนสูญเสียแรงเบรก ให้ถอนคันเร่งแล้วใช้การชาร์จไฟกลับกับแพดเดิลชะลอแทน</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 4 ============ -->
+    <section id="lights">
+      <div class="sechead">
+        <h2>ไฟเตือนบนหน้าปัด — ตัวไหนต้องจอดทันที</h2>
+        <div class="src">แผงหน้าปัด · คู่มือ น.106–131 และ 488–495</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="ไฟเตือนแดง จอดทันที หยุดรถ">
+          <h3>สีแดง — หยุดรถในที่ปลอดภัยทันที</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>ไฟเตือน</th><th>หมายถึง</th><th>ต้องทำ</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><span class="lamp red">เบรก (แดง) ติดค้าง</span></td>
+                  <td>น้ำมันเบรกต่ำ หรือระบบเบรกผิดปกติ</td>
+                  <td><span class="urgency u-stop">จอดทันที</span><br>เช็กก่อนว่าปลดเบรกมือแล้ว จากนั้นแตะเบรกดูแรงต้าน ถ้าผิดปกติให้ดึงแพดเดิลซ้ายช่วยชะลอ แล้วหยุดรถ</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp red">เบรกแดง + เบรกเหลืองพร้อมกัน</span></td>
+                  <td>ระบบเบรกบกพร่อง แป้นเบรกจะหนักกว่าปกติ</td>
+                  <td><span class="urgency u-stop">จอดทันที</span><br>ต้องออกแรงเหยียบเบรกมากกว่าเดิม เข้าเกียร์ P กันรถไหล แล้วเรียกศูนย์</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp red">เบรกแดงกะพริบ + เบรกเหลืองติด</span></td>
+                  <td>เบรกมือไฟฟ้าบกพร่อง อาจใช้ไม่ได้</td>
+                  <td><span class="urgency u-soon">เข้าศูนย์ทันที</span><br>เลี่ยงการใช้เบรกมือ</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp red">ระบบชาร์จแบตเตอรี่ 12 โวลต์</span></td>
+                  <td>ระบบชาร์จไฟบกพร่อง</td>
+                  <td><span class="urgency u-stop">จอดและเรียกศูนย์</span><br>ถ้าจำเป็นต้องหยุดชั่วคราว <strong>อย่าดับเครื่อง</strong> เพราะอาจสตาร์ตไม่ติดอีก</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp red">แรงดันน้ำมันเครื่องต่ำ</span></td>
+                  <td>แรงดันน้ำมันเครื่องต่ำ</td>
+                  <td><span class="urgency u-stop">จอดบนพื้นราบทันที</span><br>ดับเครื่องรอ 3 นาที เช็กระดับน้ำมันเครื่อง ถ้าสตาร์ตแล้วไฟยังไม่ดับ ให้ดับเครื่องทันทีและเรียกศูนย์</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp red">ระบบถุงลม (SRS)</span></td>
+                  <td>ถุงลม ม่านถุงลม หรือตัวดึงเข็มขัดบกพร่อง</td>
+                  <td><span class="urgency u-soon">เข้าศูนย์</span></td>
+                </tr>
+                <tr>
+                  <td><span class="lamp red">เข็มขัดนิรภัย</span></td>
+                  <td>มีคนไม่คาดเข็มขัด หรือปลดระหว่างขับ</td>
+                  <td>คาดให้ครบ ถ้าคาดแล้วยังติดค้าง แสดงว่าเซ็นเซอร์ผิดพลาด ให้เข้าศูนย์</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="item" data-text="ไฟเตือนเหลืองอำพัน amber เช็กเครื่องยนต์ EPS VSA ระบบเกียร์">
+          <h3>สีเหลืองอำพัน — ขับต่อได้อย่างระวัง แต่ต้องเข้าศูนย์</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>ไฟเตือน</th><th>หมายถึง</th><th>ต้องทำ</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><span class="lamp amber">เครื่องยนต์ทำงานบกพร่อง — ติดค้าง</span></td>
+                  <td>ระบบควบคุมไอเสียหรือระบบรถยนต์ไฟฟ้าบกพร่อง</td>
+                  <td>เลี่ยงความเร็วสูง เข้าศูนย์ทันที<br><em>ถ้าเพิ่งน้ำมันหมดถัง ไฟอาจดับเองหลังเติมและขับไปหลายรอบ</em></td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">เครื่องยนต์ทำงานบกพร่อง — กะพริบ</span></td>
+                  <td>จุดระเบิดไม่ครบสูบ</td>
+                  <td><span class="urgency u-stop">จอดในที่ไม่มีวัตถุไวไฟ</span> ดับเครื่องรออย่างน้อย 10 นาทีให้เย็นลง ถ้าสตาร์ตแล้วยังกะพริบ ให้ขับไม่เกิน <strong>50 กม./ชม.</strong> ไปศูนย์ที่ใกล้ที่สุด</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">ระบบไฟฟ้า (e:HEV)</span></td>
+                  <td>ระบบรถยนต์ไฟฟ้าบกพร่อง</td>
+                  <td>เข้าศูนย์ทันที · ถ้าขึ้นข้อความ <span class="mono">Stop Driving When Safe</span> ให้จอดทันที</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">พวงมาลัยพาวเวอร์ (EPS)</span></td>
+                  <td>ระบบพวงมาลัยไฟฟ้าบกพร่อง</td>
+                  <td>จอดแล้วสตาร์ตใหม่ ถ้ายังติดให้เข้าศูนย์ · ขึ้น <span class="mono">Do Not Drive</span> = จอดทันที</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">ระบบเกียร์ — กะพริบ</span></td>
+                  <td>ระบบเกียร์บกพร่อง</td>
+                  <td>เลี่ยงการเร่งกะทันหัน เข้าศูนย์ทันที · ขึ้น <span class="mono">Do Not Drive</span> = จอดทันที</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">ABS ติดค้าง</span></td>
+                  <td>ระบบป้องกันล้อล็อกบกพร่อง</td>
+                  <td>เบรกยังทำงานปกติ แต่ไม่มี ABS ให้เข้าศูนย์</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">VSA ติดค้าง</span></td>
+                  <td>ระบบทรงตัว/ช่วยออกตัวทางชันบกพร่อง</td>
+                  <td>เข้าศูนย์</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">ระบบสนับสนุนการขับขี่</span></td>
+                  <td>CMBS หรือ RDM ใช้งานไม่ได้ชั่วคราว</td>
+                  <td>มักเกิดจาก<strong>กล้องหน้าสกปรกหรือร้อนเกินไป</strong> ให้จอดเช็ดกระจกบริเวณกล้องด้วยผ้านุ่ม หรือเปิดแอร์ระบายความร้อนกล้อง</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">ระดับน้ำมันเชื้อเพลิงต่ำ</span></td>
+                  <td>เหลือประมาณ 5.3 ลิตร</td>
+                  <td>เติมน้ำมันโดยเร็ว · ถ้า<strong>กะพริบ</strong> แสดงว่ามาตรวัดเสีย ให้เข้าศูนย์</td>
+                </tr>
+                <tr>
+                  <td><span class="lamp amber">Immobilizer กะพริบ</span></td>
+                  <td>ระบบอ่านข้อมูลกุญแจไม่ได้</td>
+                  <td>ปรับเป็น VEHICLE OFF แล้วเลือก ON ใหม่ ถ้ายังกะพริบซ้ำๆ ให้เข้าศูนย์</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="warn"><b>รู้ไว้</b><span>หลังถอดและต่อแบตเตอรี่ 12 โวลต์ใหม่ ไฟเตือน ACC / VSA / VSA OFF / CMBS / RDM / ระบบสนับสนุนการขับขี่ อาจติดสีเหลืองพร้อมกัน ให้ขับระยะสั้นๆ ที่ความเร็ว<strong>เกิน 20 กม./ชม.</strong> แล้วไฟควรดับเอง ถ้าไม่ดับจึงเข้าศูนย์</span></div>
+        </div>
+
+        <div class="item" data-text="ไฟเขียว ไฟเทา READY EV ECON สถานะปกติ">
+          <h3>สีเขียว เทา ขาว — บอกสถานะ ไม่ใช่ความผิดปกติ</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>ไฟเตือน</th><th>หมายถึง</th></tr></thead>
+              <tbody>
+                <tr><td><span class="lamp green">READY</span></td><td>รถพร้อมขับแล้ว ถือเป็นตัวชี้ขาดแทนเสียงเครื่องยนต์</td></tr>
+                <tr><td><span class="lamp green">โหมด EV</span></td><td>กำลังวิ่งด้วยมอเตอร์ล้วน เครื่องยนต์ไม่ทำงาน</td></tr>
+                <tr><td><span class="lamp green">ECON</span></td><td>โหมดประหยัดกำลังทำงาน</td></tr>
+                <tr><td><span class="lamp green">ACC / LKAS สีเขียว</span></td><td>ระบบกำลังควบคุมรถอยู่ (สีขาว = พร้อมใช้แต่ยังไม่ทำงาน)</td></tr>
+                <tr><td><span class="lamp grey">CMBS / RDM สีเทา</span></td><td>ระบบถูกปิดอยู่ ตั้งเปิดใหม่ได้ที่เมนูระบบสนับสนุนการขับขี่บนหน้าจอ</td></tr>
+                <tr><td><span class="lamp green">แพดเดิลชะลอความเร็ว</span></td><td>ติดเมื่อกำลังใช้แพดเดิล · <strong>กะพริบ</strong> = ชะลอไม่ตอบสนอง (แบตเตอรี่เต็มหรืออุณหภูมิไม่เหมาะ)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 5 ============ -->
+    <section id="sensing">
+      <div class="sechead">
+        <h2>Honda SENSING — ใช้ให้เป็น และรู้ขีดจำกัด</h2>
+        <div class="src">ฮอนด้าเซนส์ซิ่ง · คู่มือ น.297–373</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="CMBS เตือนการชน ช่วยเบรก คนเดินถนน จักรยาน">
+          <h3>CMBS — เตือนการชนพร้อมช่วยเบรก</h3>
+          <p>เริ่มตรวจจับเมื่อความเร็วถึงราว <strong>5 กม./ชม.</strong> ขึ้นไป ตรวจจับรถ (รวมจักรยานยนต์) คนเดินถนน และจักรยานที่กำลังเคลื่อนที่</p>
+          <ul class="tick">
+            <li>ทำงานได้ถึงราว <strong>100 กม./ชม.</strong> กับรถสวนมา รถจอดอยู่ คนเดินถนนที่ตัดหน้า และรถที่เข้ามาจากด้านข้าง</li>
+            <li>ที่ความเร็ว <strong>ไม่เกิน 30 กม./ชม.</strong> ยังช่วยตอนเลี้ยวขวาตรงทางแยกแล้วมีรถสวนมาด้วย</li>
+            <li>เปิดอัตโนมัติทุกครั้งที่สตาร์ตระบบไฟฟ้า ปิด/เปิดได้จากเมนูระบบสนับสนุนการขับขี่</li>
+          </ul>
+          <div class="warn"><b>สำคัญ</b><span>CMBS ออกแบบมาเพื่อ<strong>ลดความรุนแรง</strong>ของการชนที่เลี่ยงไม่ได้ ไม่ใช่ป้องกันการชนหรือหยุดรถให้อัตโนมัติ คนขับยังรับผิดชอบเบรกและพวงมาลัยเต็มที่</span></div>
+        </div>
+
+        <div class="item" data-text="ACC LSF ควบคุมความเร็วอัตโนมัติ cruise control ตามรถคันหน้า ระยะห่าง">
+          <h3>ACC with LSF — ควบคุมความเร็วและตามรถคันหน้า</h3>
+          <ol class="steps">
+            <li>กดปุ่ม <span class="mono">ACC</span> บนพวงมาลัย ไอคอน<strong>สีขาว</strong>ขึ้นบนมาตรวัด = พร้อมใช้</li>
+            <li>ที่ความเร็ว <strong>30 กม./ชม. ขึ้นไป</strong> ถอนเท้าแล้วกด <span class="mono">RES/+</span> หรือ <span class="mono">SET/−</span> ไอคอนเปลี่ยนเป็น<strong>สีเขียว</strong> = กำลังทำงาน</li>
+            <li>ปรับความเร็ว — กดทีละครั้ง ±1 กม./ชม. · กดค้าง ±10 กม./ชม.</li>
+            <li>ปรับระยะห่าง — กดปุ่มตั้งระยะวนระหว่าง ไกลมาก / ไกล / ปานกลาง / ใกล้</li>
+          </ol>
+          <p class="note">ระยะห่างคิดเป็นเวลาคงที่ ไม่ใช่ระยะคงที่ — ใกล้ 1.2 วิ · ปานกลาง 1.6 วิ · ไกล 2.0 วิ · ไกลมาก 2.4 วิ (ที่ 80 กม./ชม. เท่ากับ 26.6 / 34.6 / 44.0 / 53.6 เมตร ตามลำดับ)</p>
+          <p><strong>ยกเลิก</strong> ด้วยการกด CANCEL กดปุ่ม ACC หรือแตะเบรก · กด <span class="mono">RES/+</span> เพื่อกลับไปใช้ความเร็วที่ตั้งไว้เดิม (แสดงเป็นสีเทาบนมาตรวัด)</p>
+          <div class="warn"><b>ห้าม</b><span>ออกจากรถขณะ ACC หยุดรถให้อยู่ รถอาจเคลื่อนโดยไม่มีผู้ควบคุม · และห้ามใช้ ACC บนถนนที่รถเปลี่ยนเลนบ่อย รถคลานติดๆ ขัดๆ ถนนโค้งหักศอก หรือทางลงเนินชัน เพราะ ACC จะไม่เติมแรงเบรกให้คงความเร็วที่ตั้งไว้</span></div>
+        </div>
+
+        <div class="item" data-text="LKAS ควบคุมเลน lane keeping 72 180 กม">
+          <h3>LKAS — ช่วยควบคุมรถให้อยู่กลางเลน</h3>
+          <p>ใช้ได้เมื่อครบทุกเงื่อนไข เส้นจราจรชัดทั้งสองข้าง รถอยู่กลางเลน ทางตรงหรือโค้งเล็กน้อย ไม่ได้เปิดไฟเลี้ยว ไม่ได้เบรกกะทันหัน และ<strong>ความเร็วอยู่ระหว่าง 72–180 กม./ชม.</strong></p>
+          <ul class="tick">
+            <li>กดปุ่ม <span class="mono">LKAS</span> → ไอคอน<strong>สีขาว</strong> คือสแตนด์บาย → เมื่อขับกลางเลนและจับเส้นได้ครบสองข้าง จะเปลี่ยนเป็น<strong>สีเขียว</strong></li>
+            <li>ระบบจะระงับเองเมื่อ ความเร็วต่ำกว่าราว 64 กม./ชม. หักพวงมาลัยกะทันหัน ไม่จับพวงมาลัย ผ่านโค้งหักศอก หรือ ABS/VSA ทำงาน</li>
+            <li><strong>LKAS ปิดทุกครั้งที่ดับรถ</strong> ต้องกดเปิดใหม่ทุกเที่ยว</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="RDM เตือนออกนอกเลน lane departure">
+          <h3>RDM — เตือนเมื่อรถออกนอกช่องทาง</h3>
+          <p>เตือนด้วยข้อความ <span class="mono">Lane Departure</span> พร้อมแรงสั่นที่พวงมาลัย และเพิ่มแรงบิดดึงรถกลับเข้าเลน <strong>เฉพาะตอนที่ไม่ได้เปิดไฟเลี้ยว</strong> ระบบจะยังไม่ทำงานราว 15 วินาทีแรกหลังเปิดระบบไฟฟ้า</p>
+          <p class="note">ถ้าระบบเตือนซ้ำหลายครั้งแล้วคนขับไม่ตอบสนอง ระบบจะปิดการช่วยบังคับเลี้ยวชั่วคราวและเหลือแค่เสียงเตือน ไม่กี่นาทีจึงกลับมาทำงานเต็มรูปแบบ</p>
+        </div>
+
+        <div class="item" data-text="ไฟสูงอัตโนมัติ auto high beam LCDN รถคันหน้าออกตัว">
+          <h3>ไฟสูงอัตโนมัติ และ LCDN</h3>
+          <ul class="tick">
+            <li><strong>ไฟสูงอัตโนมัติ</strong> ทำงานเมื่อ โหมดจ่ายไฟ ON · สวิตช์ไฟอยู่ที่ <span class="mono">AUTO</span> · ก้านสวิตช์อยู่ตำแหน่งไฟต่ำ · ไฟหน้าติดเอง · และภายนอกมืด</li>
+            <li>สลับเป็นไฟสูงเมื่อความเร็ว <strong>≥ 30 กม./ชม.</strong> ไม่มีรถนำหน้าหรือสวนมา และถนนข้างหน้ามืด · กลับเป็นไฟต่ำเมื่อ <strong>≤ 24 กม./ชม.</strong> หรือมีรถ/แสงสว่าง</li>
+            <li>ดึงก้านสวิตช์เข้าหาตัวหนึ่งครั้ง = ยกเลิกอัตโนมัติชั่วคราว ดึงอีกครั้ง = กลับมาทำงาน</li>
+            <li><strong>LCDN</strong> แจ้งเตือนด้วยเสียงและภาพเมื่อรถคันหน้าเริ่มเคลื่อนตัวแล้วแต่รถคุณยังจอดอยู่</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="กล้องหน้า ข้อจำกัด ฝนตก หมอก สกปรก บรรทุกหนัก">
+          <h3>เมื่อไหร่ที่ระบบจะทำงานได้ไม่เต็มที่</h3>
+          <p>ทั้ง CMBS, ACC, LKAS และ RDM ล้วนอาศัยกล้องหลังกระจกมองหลังตัวเดียวกัน จึงมีข้อจำกัดร่วมกัน</p>
+          <ul class="tick">
+            <li>ฝน หมอก หิมะ แสงสะท้อนจ้า สว่าง-มืดสลับฉับพลัน เช่น ปากอุโมงค์ หรือขับกลางคืนโดยไม่เปิดไฟหน้า</li>
+            <li>กระจกหน้าบริเวณกล้องมีคราบ โคลน สติกเกอร์ ฟิล์ม หรืออุปกรณ์เสริมบัง — <strong>ห้ามแตะเลนส์กล้อง</strong> และระวังน้ำยาล้างกระจกโดนเลนส์</li>
+            <li>เส้นจราจรซีดจาง ทับซ้อน มีรอยยาง หรือเป็นเส้นชั่วคราวจากการซ่อมถนน</li>
+            <li><strong>บรรทุกหนักเกินพิกัด</strong> ทำให้รถเชิดและไฟเตือนระบบอาจติดชั่วคราว ระบบจะถูกยกเลิกอัตโนมัติ</li>
+            <li>รถคันหน้าเป็นจักรยานยนต์ รถสามล้อ รถรูปทรงพิเศษ หรือรถบรรทุกที่ท้ายสูงมาก</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 6 ============ -->
+    <section id="key">
+      <div class="sechead">
+        <h2>สมาร์ทคีย์ ประตู และสวิตช์ที่ใช้บ่อย</h2>
+        <div class="src">อุปกรณ์และการใช้งาน · คู่มือ น.168–256</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="สมาร์ทคีย์ smart key ระยะ 80 ซม ล็อก ปลดล็อก 30 วินาที">
+          <h3>สมาร์ทคีย์ — ตัวเลขที่ควรรู้</h3>
+          <ul class="tick">
+            <li>ล็อก/ปลดล็อกได้ในรัศมี <strong>ประมาณ 80 ซม.</strong> จากมือเปิดประตูหรือมือเปิดประตูท้าย</li>
+            <li>ปลดล็อกแล้ว<strong>ไม่เปิดประตูภายใน 30 วินาที</strong> รถจะล็อกกลับเองอัตโนมัติ</li>
+            <li>หลังกดล็อก ต้องรออย่างน้อย <strong>2 วินาที</strong> ก่อนจับมือเปิดประตู ไม่งั้นจะไม่ปลดล็อก</li>
+            <li>ใช้ล็อก/ปลดล็อกได้เฉพาะเมื่อโหมดจ่ายไฟอยู่ที่ <strong>VEHICLE OFF</strong> และจะไม่ล็อกถ้ามีประตูเปิดค้างอยู่</li>
+            <li>ฝนตกหนักหรือในเครื่องล้างรถ น้ำที่เกาะมือเปิดประตูอาจทำให้ประตูปลดล็อกได้เอง ถ้ากุญแจอยู่ในรัศมี</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ล็อกอัตโนมัติเดินออกห่าง walk away lock 1.5 เมตร เสียงปี๊บ">
+          <h3>ระบบล็อกอัตโนมัติเมื่อเดินออกห่าง</h3>
+          <p><strong>ปิดไว้จากโรงงาน</strong> ต้องไปเปิดเองที่หน้าจอแสดงข้อมูลผู้ขับขี่ เมนูการตั้งค่า (คู่มือ น.150)</p>
+          <ol class="steps">
+            <li>ปิดประตูทุกบานขณะพกกุญแจ อยู่ในรัศมีราว <strong>1.5 เมตร</strong> จะมีเสียงเตือนว่าฟังก์ชันเริ่มทำงาน</li>
+            <li>เดินออกห่างเกิน 1.5 เมตร นานกว่า <strong>2 วินาที</strong> ไฟภายนอกกะพริบ แล้วรถจะล็อกเอง</li>
+          </ol>
+          <p class="note">ถ้ายืนอยู่ข้างรถในรัศมีที่กุญแจทำงาน รถจะล็อกเองเมื่อผ่านไปราว 30 วินาที · ฟังก์ชันจะไม่ทำงานถ้ากุญแจอยู่ในรถ หรือฝากระโปรง/ประตูยังไม่ปิด</p>
+        </div>
+
+        <div class="item" data-text="โหมดจ่ายไฟ POWER ACCESSORY VEHICLE OFF พวงมาลัยล็อก">
+          <h3>โหมดจ่ายไฟ 3 ระดับ</h3>
+          <dl class="kv">
+            <dt><strong>VEHICLE OFF</strong></dt><dd>ไฟบนปุ่มดับ พวงมาลัยล็อก ตัดไฟอุปกรณ์ทั้งหมด</dd>
+            <dt><strong>ACCESSORY</strong></dt><dd>ใช้เครื่องเสียงและอุปกรณ์เสริมได้ (กดปุ่มโดยไม่เหยียบเบรก)</dd>
+            <dt><strong>ON</strong></dt><dd>ใช้อุปกรณ์ไฟฟ้าได้ทั้งหมด</dd>
+          </dl>
+          <p class="note">ถ้าปล่อยเกียร์ไว้ที่ P และโหมด ACCESSORY นาน 30–60 นาที รถจะตัดเข้าโหมดใกล้เคียง VEHICLE OFF เองเพื่อไม่ให้แบตหมด</p>
+        </div>
+
+        <div class="item" data-text="ล็อกประตูอัตโนมัติ 15 กม ปลดล็อกเมื่อเข้าเกียร์ P">
+          <h3>ล็อก/ปลดล็อกประตูอัตโนมัติ</h3>
+          <ul class="tick">
+            <li>ประตูทุกบานล็อกเองเมื่อรถวิ่งถึงราว <strong>15 กม./ชม.</strong></li>
+            <li>ปลดล็อกเองเมื่อเข้าเกียร์ <span class="mono">P</span> พร้อมเหยียบเบรก</li>
+            <li>ปรับหรือปิดได้จากเมนูการตั้งค่าบนหน้าจอแสดงข้อมูลผู้ขับขี่</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ที่ปัดน้ำฝน AUTO INT ล้างรถ กระจกแห้ง">
+          <h3>ที่ปัดน้ำฝน — สิ่งที่ทำแล้วพัง</h3>
+          <ul class="tick">
+            <li><strong>ปิดโหมด AUTO ทุกครั้ง</strong> ก่อนเช็ดกระจกหน้า ก่อนเข้าเครื่องล้างรถ และเมื่อฝนไม่ตก ไม่งั้นระบบปัดน้ำฝนเสียหายรุนแรง</li>
+            <li>ห้ามใช้ที่ปัดน้ำฝนบนกระจกแห้ง กระจกจะเป็นรอยและใบยางพัง</li>
+            <li>ห้ามเปิดฝากระโปรงขณะก้านปัดน้ำฝนยังกางอยู่</li>
+            <li>ถ้าน้ำล้างกระจกไม่พุ่ง ให้ปิดสวิตช์ทันที ปั๊มอาจเสียหาย</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="แอร์ AUTO ไล่ฝ้า หมุนเวียนอากาศ MAX COOL">
+          <h3>แอร์และการไล่ฝ้า</h3>
+          <ul class="tick">
+            <li>กด <span class="mono">AUTO</span> แล้วตั้งอุณหภูมิ ระบบจะจัดการพัดลมและโหมดลมให้เอง</li>
+            <li><strong>ไล่ฝ้ากระจกหน้า</strong> — กดปุ่มไล่ฝ้า แล้วสลับเป็นโหมดอากาศบริสุทธิ์ (ไฟหมุนเวียนอากาศดับ) ถ้าค้างโหมดหมุนเวียนไว้ ความชื้นจะทำให้กลับมาเป็นฝ้าอีก</li>
+            <li>ห้ามตั้งอุณหภูมิต่ำสุดตอนอากาศเย็นจัด ฝ้าจะไปเกาะ<strong>ด้านนอก</strong>กระจกแทน</li>
+            <li>โหมด ECON ทำให้แอร์แปรผันอุณหภูมิมากขึ้น และแบตเตอรี่แรงสูงเหลือน้อยก็ทำให้แอร์อ่อนลงได้</li>
+            <li>ห้ามวางของคลุมเซ็นเซอร์แอร์อัตโนมัติบนแผงหน้าปัด</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="เสียงเตือนคนเดินถนน AVAS ปุ่มปิด">
+          <h3>ระบบเสียงเตือนคนเดินถนน</h3>
+          <p>ส่งเสียงเตือนคนเดินเท้าเมื่อรถวิ่งด้วยไฟฟ้าล้วนที่ความเร็วราว <strong>20 กม./ชม. หรือต่ำกว่า</strong> ปิดชั่วคราวได้ด้วยปุ่มบนแผงคนขับ แต่ระบบจะกลับมาเปิดเองทุกครั้งที่สตาร์ตใหม่</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 7 ============ -->
+    <section id="care">
+      <div class="sechead">
+        <h2>ของเหลว ยาง และการตรวจเช็กด้วยตัวเอง</h2>
+        <div class="src">การบำรุงรักษา · คู่มือ น.398–437</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="ตรวจเช็กรายเดือน น้ำมันเบรก ลมยาง หลอดไฟ ใบปัดน้ำฝน">
+          <h3>รอบการตรวจที่คู่มือกำหนดให้เจ้าของทำเอง</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>ตรวจอะไร</th><th>บ่อยแค่ไหน</th></tr></thead>
+              <tbody>
+                <tr><td>ระดับน้ำมันเบรก</td><td class="num">ทุกเดือน</td></tr>
+                <tr><td>แรงดันลมยาง + ดอกยาง + สิ่งแปลกปลอม</td><td class="num">ทุกเดือน</td></tr>
+                <tr><td>หลอดไฟภายนอกรถทุกดวง</td><td class="num">ทุกเดือน</td></tr>
+                <tr><td>ขั้วแบตเตอรี่ 12 โวลต์ (คราบสนิม)</td><td class="num">ทุกเดือน</td></tr>
+                <tr><td>สภาพใบปัดน้ำฝน</td><td class="num">อย่างน้อยทุก 6 เดือน</td></tr>
+                <tr><td>สภาพรถโดยรวม น้ำมันเครื่อง น้ำหล่อเย็น น้ำฉีดกระจก</td><td class="num">ก่อนเดินทางไกล / ตอนล้างรถ / ตอนเติมน้ำมัน</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="item" data-text="ลมยาง แรงดัน ป้ายขอบประตู ยางเย็น 3 ชั่วโมง 1.6 กม">
+          <h3>ลมยาง — วัดตอนยางเย็นเท่านั้น</h3>
+          <ul class="tick">
+            <li>ค่าลมยางที่ถูกต้องอยู่ที่<strong>ป้ายบนขอบประตูฝั่งคนขับ</strong> ไม่ใช่ตัวเลขบนแก้มยาง</li>
+            <li>วัดตอนยางเย็น คือ<strong>จอดมาแล้วอย่างน้อย 3 ชั่วโมง</strong> หรือขับมาไม่ถึง 1.6 กม.</li>
+            <li>วัดตอนยางร้อนจะได้ค่าสูงเกินจริง <strong>30–40 kPa</strong> (0.3–0.4 bar / 4–6 psi)</li>
+            <li>ยางสภาพดีก็ยังรั่วเองเดือนละ <strong>10–20 kPa</strong> (1–2 psi) จึงต้องเช็กทุกเดือน</li>
+            <li>ขับเร็วเกิน <strong>160 กม./ชม.</strong> คู่มือให้ปรับลมยางขณะเย็นเป็น หน้า 260 kPa (2.6 bar / 38 psi) หลัง 240 kPa (2.4 bar / 35 psi) สำหรับยางขนาด 185/55R16 87H</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ดอกยาง สึก 1.6 มม ตัวบ่งชี้การสึก เปลี่ยนยาง 5 ปี 10 ปี น็อตล้อ 108">
+          <h3>ยาง — เมื่อไหร่ต้องเปลี่ยน</h3>
+          <ul class="tick">
+            <li>ร่องยางตรงตัวบ่งชี้การสึกตื้นกว่าจุดอื่น <strong>1.6 มม.</strong> เมื่อดอกยางสึกจนตัวบ่งชี้โผล่เสมอหน้ายาง = ต้องเปลี่ยน</li>
+            <li>ยางอายุเกิน <strong>5 ปี</strong> ให้ตรวจสภาพทุกปี และ<strong>ห้ามใช้ยางที่เกิน 10 ปี</strong>นับจากวันผลิต แม้ดูสภาพดี</li>
+            <li>เปลี่ยนพร้อมกันทั้ง 4 เส้นดีที่สุด ถ้าทำไม่ได้ให้เปลี่ยนเป็นคู่หน้าหรือคู่หลัง</li>
+            <li>ใช้ยางผิดขนาดหรือผิดโครงสร้าง จะทำให้ <strong>ABS และ VSA ทำงานผิดพลาด</strong></li>
+            <li>แรงขันน็อตล้อ <strong>108 N·m</strong> (11 kgf·m / 80 lbf·ft)</li>
+            <li>ยางดอกทิศทางเดียว สลับได้เฉพาะหน้า↔หลัง ห้ามสลับซ้าย↔ขวา</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="น้ำมันเครื่อง ก้านวัด ห่วงสีส้ม 3 นาที เติม">
+          <h3>เช็กน้ำมันเครื่อง</h3>
+          <ol class="steps">
+            <li>จอดพื้นราบ ปิดระบบไฟฟ้า ถ้าเพิ่งดับเครื่องให้<strong>รอ 3 นาที</strong></li>
+            <li>ดึงก้านวัด (<strong>ห่วงสีส้ม</strong>) เช็ดด้วยผ้าสะอาด แล้วเสียบกลับจนสุด</li>
+            <li>ดึงออกอีกครั้ง ระดับควรอยู่ระหว่างขีดสูงสุดกับต่ำสุด</li>
+          </ol>
+          <p class="note">น้ำมันเครื่องที่ใช้คือ <strong>0W-20</strong> ของแท้ฮอนด้า หรือเกรด API SN ขึ้นไปสูตรประหยัดน้ำมัน · ห้ามเติมเกินขีดสูงสุด และ<strong>ไม่จำเป็นต้องใช้สารเติมแต่ง</strong> เพราะอาจกระทบอายุเครื่องยนต์</p>
+        </div>
+
+        <div class="item" data-text="น้ำหล่อเย็น coolant หม้อน้ำ ถังสำรอง MIN MAX Type 2">
+          <h3>น้ำหล่อเย็นและถังสำรอง</h3>
+          <ul class="tick">
+            <li>ใช้ <strong>Honda All Season Antifreeze/Coolant Type 2</strong> ซึ่งผสมมาแล้ว 50/50 <strong>ห้ามเติมน้ำเปล่าหรือสารกันเยือกแข็งเพิ่ม</strong></li>
+            <li>เช็กถังสำรองก่อน ถ้าต่ำกว่า MIN ให้เติมจนถึง MAX ถ้าถังว่างเปล่าจึงค่อยเช็กที่หม้อน้ำ</li>
+            <li><strong>ห้ามเปิดฝาหม้อน้ำขณะเครื่องร้อน</strong> น้ำยาจะพุ่งใส่จนลวกรุนแรง</li>
+            <li>ห้ามเติมสารป้องกันสนิมหรือสารเติมแต่งใดๆ ลงระบบหล่อเย็น</li>
+            <li><strong>ถังสำรองของระบบแบตเตอรี่แรงสูง</strong> เป็นคนละถัง ถ้าต่ำกว่า MIN ห้ามเติมเอง ให้เข้าศูนย์เท่านั้น</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="น้ำมันเบรก DOT 3 DOT 4 DOT 5 น้ำมันเกียร์ ATF DW-1">
+          <h3>น้ำมันเบรกและน้ำมันเกียร์</h3>
+          <ul class="tick">
+            <li>น้ำมันเบรก <strong>DOT 3 หรือ DOT 4</strong> เท่านั้น · <strong>DOT 5 ใช้ไม่ได้</strong> จะทำให้เสียหายหนัก</li>
+            <li>ระดับต้องอยู่ระหว่าง MIN–MAX ถ้าถึงหรือต่ำกว่า MIN ให้เข้าศูนย์ตรวจรอยรั่วและผ้าเบรกโดยเร็ว</li>
+            <li>น้ำมันเกียร์ <strong>Honda ATF DW-1</strong> เท่านั้น ห้ามผสมยี่ห้ออื่น และ<strong>ห้ามตรวจหรือเปลี่ยนเอง</strong> — ความเสียหายจากน้ำมันเกียร์ผิดชนิดไม่อยู่ในการรับประกัน</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="น้ำฉีดกระจก น้ำยาล้างกระจก ห้ามเติมน้ำส้มสายชู">
+          <h3>น้ำฉีดล้างกระจก</h3>
+          <p>ใช้น้ำยาล้างกระจกที่มีจำหน่ายทั่วไปเท่านั้น (ถังจุ 1.8 ลิตร) <strong>ห้ามเติมสารกันเยือกแข็งของเครื่องยนต์</strong> เพราะทำลายสีรถ และ<strong>ห้ามใช้น้ำส้มสายชูผสมน้ำ</strong> เพราะทำให้มอเตอร์ฉีดน้ำเสียหาย</p>
+        </div>
+
+        <div class="item" data-text="แบตเตอรี่ 12 โวลต์ ขั้วสนิม ผงฟู ถอดสายขั้วลบ นาฬิกา">
+          <h3>แบตเตอรี่ 12 โวลต์</h3>
+          <ul class="tick">
+            <li>เช็กคราบสนิมที่ขั้วทุกเดือน ถ้าพบให้ทำความสะอาดด้วย<strong>น้ำผสมผงฟู</strong> เช็ดแห้ง แล้วทาจาระบีกันสนิม</li>
+            <li>ถอดสายต้องถอด<strong>ขั้วลบ (−) ก่อนเสมอ</strong> และต่อกลับเป็นอันดับสุดท้าย</li>
+            <li>ถอดแบตเตอรี่แล้ว <strong>นาฬิกาจะถูกรีเซ็ต</strong></li>
+            <li>ชาร์จด้วยเครื่องชาร์จ ต้องเลือกแรงดัน<strong>ต่ำกว่า 15 โวลต์</strong></li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ประหยัดน้ำมัน fuel economy ขับประหยัด">
+          <h3>ขับให้ประหยัดตามที่คู่มือแนะนำ</h3>
+          <ul class="tick">
+            <li>เร่งและชะลอ<strong>อย่างช้าๆ</strong> ให้คะแนนดีที่สุด ส่วนการเร่งหรือชะลอแบบฉับพลันทำให้แย่ลง</li>
+            <li>รักษาลมยางตามที่กำหนดเสมอ</li>
+            <li>ไม่บรรทุกหนักเกินจำเป็น และล้างโคลนใต้ท้องรถออก เพราะเพิ่มน้ำหนักและแรงต้าน</li>
+            <li>เร่งแรงและวิ่งเร็ว ทำให้รถสลับไปใช้เครื่องยนต์เบนซินง่ายขึ้น · ใช้แอร์หนักก็ทำให้ไฟในแบตเตอรี่ลดเร็ว</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 8 ============ -->
+    <section id="service">
+      <div class="sechead">
+        <h2>ตารางเข้าศูนย์ (รุ่นไฮบริด)</h2>
+        <div class="src">สมุดรับประกัน · ตารางบำรุงรักษา น.15–17</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="ตารางบำรุงรักษา ระยะ 10000 20000 30000 40000 100000 เข้าศูนย์">
+          <h3>ยึดระยะทางหรือเวลา แล้วแต่อย่างใดถึงก่อน</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>รายการ</th><th>ระยะ</th><th>เท่ากับ</th></tr></thead>
+              <tbody>
+                <tr><td><strong>เปลี่ยนน้ำมันเครื่อง</strong></td><td class="num">ทุก 10,000 กม.</td><td class="num">6 เดือน</td></tr>
+                <tr><td><strong>เปลี่ยนกรองน้ำมันเครื่อง</strong></td><td class="num">ทุก 20,000 กม.</td><td class="num">12 เดือน</td></tr>
+                <tr><td>เปลี่ยนกรองแอร์</td><td class="num">ทุก 20,000 กม.</td><td class="num">12 เดือน</td></tr>
+                <tr><td>ตรวจไส้กรองอากาศ (เปลี่ยนทุกครั้งที่ 3)</td><td class="num">ตรวจ 10,000 · เปลี่ยน 30,000 กม.</td><td class="num">18 เดือน</td></tr>
+                <tr><td>ตรวจเบรกหน้า-หลัง และสลับยาง</td><td class="num">ทุก 10,000 กม.</td><td class="num">6 เดือน</td></tr>
+                <tr><td>ตรวจช่วงล่าง ลูกหมาก แร็ค ยางกันฝุ่น</td><td class="num">ทุก 10,000 กม.</td><td class="num">6 เดือน</td></tr>
+                <tr><td>ตรวจระดับน้ำ/น้ำมันต่างๆ ท่อเบรก ท่อไอเสีย ถังน้ำมัน</td><td class="num">ทุก 20,000 กม.</td><td class="num">12 เดือน</td></tr>
+                <tr><td>ตรวจน้ำยาซ่อมยางรั่วชั่วคราว (วันหมดอายุ)</td><td class="num">ทุก 20,000 กม.</td><td class="num">12 เดือน</td></tr>
+                <tr><td>ตรวจระยะห่างวาล์ว</td><td class="num">ทุก 40,000 กม.</td><td class="num">24 เดือน</td></tr>
+                <tr><td><strong>เปลี่ยนน้ำมันเบรก</strong></td><td class="num">ทุก 60,000 กม.</td><td class="num">36 เดือน</td></tr>
+                <tr><td>เปลี่ยนหัวเทียน</td><td class="num">ทุก 100,000 กม.</td><td class="num">60 เดือน</td></tr>
+                <tr><td>เปลี่ยนน้ำมันเกียร์</td><td class="num">ทุก 100,000 กม.</td><td class="num">60 เดือน</td></tr>
+                <tr><td>เปลี่ยนสารหล่อเย็น (ตรวจทุก 10,000 กม.)</td><td class="num">200,000 กม.</td><td class="num">120 เดือน</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">ตารางนี้ถือตามการใช้งานแบบปกติ อ้างอิงตารางเต็มในสมุดรับประกันหน้า 15–17</p>
+        </div>
+
+        <div class="item" data-text="ใช้งานหนัก severe condition ถี่ขึ้น">
+          <h3>ถ้าเข้าข่ายใช้งานหนัก ต้องเข้าศูนย์ถี่ขึ้น</h3>
+          <ul class="tick">
+            <li>ขับน้อยกว่า 8 กม. ต่อการใช้รถแต่ละครั้ง</li>
+            <li>ขับในอุณหภูมิร้อนจัดเกิน 35 °C</li>
+            <li>เดินเบาหรือขับๆ หยุดๆ เป็นเวลานาน</li>
+            <li>ลากจูงรถคันอื่น หรือขับขึ้น-ลงเนินเขาเป็นประจำ</li>
+            <li>ขับบนถนนโคลน ฝุ่น หรือทราย</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="รับประกัน 3 ปี 100000 กม ตรวจเช็กฟรี ช่วยเหลือฉุกเฉิน 24 ชั่วโมง">
+          <h3>สิทธิ์ตามสมุดรับประกัน</h3>
+          <ul class="tick">
+            <li>รับประกัน <strong>3 ปี หรือ 100,000 กม.</strong> แล้วแต่อย่างใดถึงก่อน</li>
+            <li>บริการช่วยเหลือฉุกเฉินนอกสถานที่ <strong>24 ชั่วโมง</strong> ตลอดระยะรับประกัน — รถยกลากฟรีไปศูนย์ที่ใกล้ที่สุดโดยไม่จำกัดระยะทาง และเติมน้ำมันฟรี 10 ลิตร ปีละ 1 ครั้ง กรณีน้ำมันหมดฉุกเฉิน</li>
+            <li>ควรเก็บสมุดรับประกันไว้ในรถตลอด เพราะใช้เป็นหลักฐานขอรับบริการในระยะรับประกัน</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 9 ============ -->
+    <section id="emergency">
+      <div class="sechead">
+        <h2>เหตุฉุกเฉิน — ทำอะไรก่อนหลัง</h2>
+        <div class="src">การจัดการกับเหตุฉุกเฉิน · คู่มือ น.457–508</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="ยางแบน ชุดปะยาง ปั๊มลม น้ำยาซ่อมยาง 80 กม 200 กม">
+          <h3>ยางแบน — รถคันนี้ไม่มียางอะไหล่ ใช้ชุดปะยางชั่วคราว</h3>
+          <p>ถ้ายางแบนขณะขับ ให้จับพวงมาลัยให้แน่น ค่อยๆ แตะเบรกชะลอ แล้วจอดในที่ปลอดภัย</p>
+          <ol class="steps">
+            <li>จอดบนพื้นราบที่มั่นคงไม่ลื่น ใส่เบรกมือ เข้าเกียร์ <span class="mono">P</span> เปิดไฟฉุกเฉิน แล้วปิดระบบไฟฟ้า</li>
+            <li>เอาชุดซ่อมยางรั่วออกจากใต้พื้นห้องเก็บสัมภาระ <strong>วางหงายขึ้นบนพื้นราบ</strong> ห้ามวางตะแคง</li>
+            <li>เขย่าขวดน้ำยาให้ดี เปิดฝา (<strong>ห้ามแกะฝาซีล</strong>) แล้วหมุนขวดเข้ากับปั๊มลมให้แน่น</li>
+            <li>ต่อสายปั๊มลมเข้าวาล์วยาง เสียบปลั๊กเข้าช่องจ่ายไฟในรถ แล้ว<strong>สตาร์ตรถ</strong> (ต้องอยู่ในที่โล่ง)</li>
+            <li>เปิดสวิตช์ปั๊มลม เติมจนถึงค่าลมยางที่ป้ายขอบประตู <strong>ห้ามเดินปั๊มเกิน 10 นาที</strong></li>
+            <li>ถอดสายเก็บของ ติดสติกเกอร์จำกัดความเร็ว แล้ว<strong>ขับราว 10 นาที หรือ 3–10 กม. ที่ไม่เกิน 80 กม./ชม.</strong> เพื่อกระจายน้ำยาให้ทั่ว</li>
+            <li>จอดแล้ววัดลมยางอีกครั้งด้วยมาตรวัดบนปั๊ม</li>
+          </ol>
+          <div class="tablewrap" style="margin-top:12px">
+            <table>
+              <thead><tr><th>ค่าลมยางที่วัดได้</th><th>ทำอย่างไรต่อ</th></tr></thead>
+              <tbody>
+                <tr><td class="num">ต่ำกว่า 130 kPa (1.3 bar / 19 psi)</td><td><span class="urgency u-stop">ห้ามขับต่อ</span> รอยรั่วเสียหายเกินไป ให้เรียกรถลาก</td></tr>
+                <tr><td class="num">130 kPa ถึงต่ำกว่าค่าที่กำหนด</td><td>เติมลมให้ถึงค่าที่กำหนด แล้วทำขั้นตอนขับกระจายน้ำยาซ้ำ</td></tr>
+                <tr><td class="num">ถึงค่าที่กำหนดแล้ว</td><td>ขับไปร้านที่ใกล้ที่สุดได้ <strong>ไม่เกิน 80 กม./ชม. และไม่เกิน ~200 กม.</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="warn"><b>ห้ามใช้ชุดปะยาง</b><span>เมื่อ รูรั่วใหญ่กว่า 4 มม. · รั่วมากกว่า 1 เส้น · แก้มยางเสียหายหรือรั่วนอกหน้ายาง · ขอบล้อเสียหาย · น้ำยาหมดอายุ — และ<strong>ห้ามดึงตะปูหรือสกรูที่เสียบอยู่ออก</strong></span></div>
+        </div>
+
+        <div class="item" data-text="สตาร์ตไม่ติด รถไม่ติด ตรวจสอบ กุญแจ แบตกุญแจหมด">
+          <h3>สตาร์ตไม่ติด — ไล่ตามลำดับนี้</h3>
+          <ol class="steps">
+            <li>ดูข้อความบนหน้าจอ — <span class="mono">Temperature Too Low For Vehicle To Operate</span> ต้องรอให้อุณหภูมิสูงขึ้น</li>
+            <li>ขึ้น <span class="mono">To Start, Hold Remote Near Start Button</span> = <strong>แบตกุญแจใกล้หมด</strong> ดูวิธีถัดไป</li>
+            <li>ตรวจว่าเกียร์อยู่ที่ <span class="mono">P</span></li>
+            <li>ดูไฟเตือน Immobilizer ถ้ากะพริบ ให้ปรับเป็น VEHICLE OFF แล้ว ON ใหม่</li>
+            <li>ตรวจฟิวส์ · ถ้าครบทุกข้อแล้วยังไม่ติด ให้พ่วงสตาร์ตหรือเรียกศูนย์</li>
+          </ol>
+        </div>
+
+        <div class="item" data-text="แบตกุญแจหมด สมาร์ทคีย์ โลโก้ H แตะปุ่ม POWER CR2032">
+          <h3>แบตสมาร์ทคีย์หมด — สตาร์ตยังไงก็ได้</h3>
+          <ol class="steps">
+            <li>กดปุ่ม <span class="mono">POWER</span> จะมีเสียงเตือนและปุ่มกะพริบราว 30 วินาที</li>
+            <li>ขณะปุ่มกะพริบ ให้เอา<strong>ด้านโลโก้ตัว H ของสมาร์ทคีย์แตะที่กลางปุ่ม POWER</strong> โดยหันด้านปุ่มกดเข้าหาตัวคุณ</li>
+            <li>มีเสียงเตือนและปุ่มสว่างราว 10 วินาที ให้<strong>เหยียบเบรกแล้วกดปุ่ม POWER</strong> ภายในช่วงนั้น ไฟ READY จะติด</li>
+          </ol>
+          <p class="note">แบตเตอรี่สมาร์ทคีย์เป็นชนิด <strong>CR2032</strong> · ถ้ากดปุ่มแล้วไฟ LED บนกุญแจไม่ติด แปลว่าแบตหมดแล้ว</p>
+        </div>
+
+        <div class="item" data-text="พ่วงแบต jump start สายพ่วง ขั้วบวก ขั้วลบ โบ้ลท์เครื่องยนต์">
+          <h3>พ่วงแบตเตอรี่ 12 โวลต์</h3>
+          <p>ปิดอุปกรณ์ไฟฟ้าทั้งหมด ดับเครื่อง แล้วเปิดฝากระโปรง</p>
+          <ol class="steps">
+            <li>เปิดฝาครอบขั้ว <strong>(+)</strong> ของแบตเตอรี่ในรถคุณ</li>
+            <li>ต่อสายเส้นแรกที่ขั้ว <strong>(+) ของรถคุณ</strong> → อีกปลายที่ขั้ว <strong>(+) ของแบตช่วย</strong></li>
+            <li>ต่อสายเส้นที่สองที่ขั้ว <strong>(−) ของแบตช่วย</strong> → อีกปลายที่<strong>โบ้ลท์ยึดเครื่องยนต์</strong>ตามที่คู่มือระบุ ห้ามต่อเข้าชิ้นส่วนอื่น</li>
+            <li>ถ้าพ่วงจากรถอีกคัน ให้สตาร์ตรถคันช่วยและเร่งรอบเล็กน้อย แล้วจึงสตาร์ตรถคุณ</li>
+            <li>ติดแล้วให้ถอดตามลำดับย้อนกลับ — สายที่ขั้วสายดินในรถคุณก่อน แล้วค่อยไล่ไปจนครบ</li>
+          </ol>
+          <div class="warn"><b>ระวัง</b><span>ใช้แบตช่วย 12 โวลต์เท่านั้น ห้ามให้เกิดประกายไฟหรือเปลวไฟใกล้แบตเตอรี่ และห้ามให้ปลายสายทั้งสองข้างแตะกัน</span></div>
+        </div>
+
+        <div class="item" data-text="โอเวอร์ฮีต ความร้อนขึ้น High Temperature Power Reduced Engine Temperature Too Hot">
+          <h3>โอเวอร์ฮีต — แยกให้ออกว่าเจอข้อความไหน</h3>
+          <p><strong>ข้อความ <span class="mono">High Temperature. Power Reduced.</span></strong> — ระบบจ่ายไฟร้อนเกินไป</p>
+          <ol class="steps">
+            <li>จอดในที่ปลอดภัยทันที ใส่เบรกมือ เข้าเกียร์ P ปิดอุปกรณ์เสริมทั้งหมด เปิดไฟฉุกเฉิน</li>
+            <li><strong>คงโหมดจ่ายไฟไว้ที่ ON</strong> แล้วรอจนข้อความหายไป ถ้าไม่หายให้เข้าศูนย์</li>
+          </ol>
+          <p style="margin-top:14px"><strong>ข้อความ <span class="mono">Engine Temperature Too Hot. Allow Engine To Cool.</span> หรือมีไอน้ำพุ่ง</strong></p>
+          <ol class="steps">
+            <li>จอดในที่ปลอดภัยทันที ปิดอุปกรณ์เสริม เปิดไฟฉุกเฉิน</li>
+            <li><strong>ไม่มีไอน้ำ</strong> — ติดเครื่องทิ้งไว้แล้วเปิดฝากระโปรง · <strong>มีไอน้ำ</strong> — ดับเครื่อง รอจนไอน้ำหยุด จึงเปิดฝากระโปรง</li>
+            <li>ตรวจว่าพัดลมระบายความร้อนหมุนอยู่ ถ้าไม่หมุนให้ดับเครื่องทันที</li>
+            <li>รอเครื่องเย็น แล้วเช็กระดับสารหล่อเย็นและรอยรั่ว เติมถึง MAX ถ้าพร่อง</li>
+            <li>สตาร์ตใหม่ ถ้าข้อความไม่ขึ้นอีกก็ขับต่อได้ ถ้าขึ้นอีกให้ติดต่อศูนย์</li>
+          </ol>
+          <div class="warn"><b>ห้าม</b><span>เปิดฝากระโปรงขณะมีไอน้ำพุ่งออกมา และห้ามเปิดฝาหม้อน้ำขณะเครื่องยังร้อน · ขับต่อทั้งที่ข้อความนี้ขึ้น เครื่องยนต์จะเสียหาย</span></div>
+        </div>
+
+        <div class="item" data-text="ดับเครื่องฉุกเฉิน ขณะขับ กดปุ่ม POWER 2 วินาที 3 ครั้ง">
+          <h3>ดับระบบไฟฟ้าฉุกเฉินขณะรถกำลังวิ่ง</h3>
+          <p>ทำได้สองวิธี — <strong>กดปุ่ม POWER ค้าง 2 วินาที</strong> หรือ <strong>กดเต็มแรง 3 ครั้ง</strong></p>
+          <div class="warn"><b>ผลที่ตามมา</b><span>พวงมาลัยไม่ล็อก แต่<strong>ระบบช่วยผ่อนแรงพวงมาลัยและเบรกจะหยุดทำงาน</strong> ต้องใช้แรงมากขึ้นมากในการเลี้ยวและหยุดรถ ให้ใช้<strong>เท้าทั้งสองข้าง</strong>เหยียบเบรกแล้วหยุดรถในที่ปลอดภัยทันที</span></div>
+          <p class="note">หลังหยุดรถสนิท ให้เข้าเกียร์ P เพื่อเปลี่ยนเป็น VEHICLE OFF แล้วกดปุ่ม POWER 2 ครั้งโดยไม่เหยียบเบรก</p>
+        </div>
+
+        <div class="item" data-text="เลื่อนเกียร์ไม่ได้ shift lock ปลดล็อกเกียร์ ช่องปลดล็อก">
+          <h3>เลื่อนคันเกียร์ออกจาก P ไม่ได้</h3>
+          <ol class="steps">
+            <li>ใส่เบรกมือ</li>
+            <li>ถอดกุญแจที่ซ่อนอยู่ในตัวสมาร์ทคีย์ออกมา</li>
+            <li>สอดกุญแจลงในช่องปลดล็อกเกียร์ แล้วดันกุญแจลง</li>
+            <li>ขณะดันค้าง ให้กดปุ่มปลดล็อกคันเกียร์และเลื่อนไปที่ <span class="mono">N</span></li>
+          </ol>
+          <p class="note">ให้ศูนย์บริการตรวจคันเกียร์โดยเร็วที่สุด</p>
+        </div>
+
+        <div class="item" data-text="ฟิวส์ขาด fuse กล่องฟิวส์ ตรวจสอบ เปลี่ยน">
+          <h3>ฟิวส์ขาด</h3>
+          <p>ถ้าอุปกรณ์ไฟฟ้าตัวใดไม่ทำงาน ให้ปรับโหมดเป็น <strong>VEHICLE OFF</strong> ปิดไฟหน้าและอุปกรณ์เสริมทั้งหมด แล้วตรวจฟิวส์ของวงจรนั้น</p>
+          <ul class="tick">
+            <li>กล่องฟิวส์มี 4 จุด — ในห้องเครื่อง 2 กล่อง และใต้แผงคอนโซลหน้า ฝั่งคนขับกับฝั่งผู้โดยสารอีกฝั่งละ 1</li>
+            <li>ฟิวส์ที่นำมาเปลี่ยนต้อง<strong>มีพิกัดแอมป์เท่าเดิม</strong> การใส่ฟิวส์สูงกว่าเดิมมากเสี่ยงทำระบบไฟฟ้าเสียหาย</li>
+            <li><strong>ฟิวส์หลักในห้องเครื่อง</strong> ต้องให้ศูนย์บริการเปลี่ยนเท่านั้น</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="ลากรถ towing รถยก สลิง เชือก โซ่ ตะขอท้าย">
+          <h3>ลากรถ</h3>
+          <ul class="tick">
+            <li>วิธีที่ดีที่สุดคือ<strong>รถกึ่งพ่วงพื้นเรียบ</strong> (ยกทั้งคันขึ้นหลังรถบรรทุก) · รองลงมาคือรถยกลากที่ยกล้อหน้าขึ้น</li>
+            <li><strong>ต้องปลดเบรกมือก่อน</strong> ถ้าปลดไม่ได้ ต้องใช้รถพื้นเรียบเท่านั้น และควรปิดฟังก์ชันเบรกมืออัตโนมัติ</li>
+            <li><strong>ห้ามลากด้วยเชือกหรือโซ่ธรรมดา</strong> และห้ามยกหรือลากโดยยึดที่กันชน</li>
+            <li><strong>ห้ามใช้ตะขอท้ายรถ</strong>ลากรถคันอื่นหรือเคลื่อนย้ายรถคุณเอง ตะขออาจแตกหัก</li>
+            <li>รถรุ่นนี้<strong>ไม่ได้ออกแบบมาให้ลากพ่วง</strong> ห้ามติดตั้งตะขอลากจูง</li>
+          </ul>
+        </div>
+
+        <div class="item" data-text="เปิดประตูท้ายไม่ได้ ไขควง ฝาครอบ">
+          <h3>เปิดประตูท้ายไม่ได้</h3>
+          <ol class="steps">
+            <li>ใช้ไขควงปากแบน<strong>ห่อด้วยผ้า</strong> กันรอย แล้วงัดฝาครอบด้านในของประตูท้ายออก</li>
+            <li>กดประตูท้ายพร้อมเลื่อนคันปรับไปทางขวาด้วยไขควง</li>
+          </ol>
+          <p class="note">ดูให้แน่ใจว่ามีพื้นที่รอบประตูท้ายพอ ไม่กระแทกคนหรือของ · หลังจากนี้ให้เข้าศูนย์ตรวจสภาพ</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 10 ============ -->
+    <section id="faq">
+      <div class="sechead">
+        <h2>คำถามที่เจอบ่อย (จากคู่มือโดยตรง)</h2>
+        <div class="src">แนะนำการใช้อย่างรวดเร็ว · คู่มือ น.36–38</div>
+      </div>
+      <div class="stack">
+
+        <div class="item plain" data-text="เปลี่ยนโหมดจ่ายไฟไม่ได้ พวงมาลัยล็อก">
+          <h3>เปลี่ยนจาก VEHICLE OFF เป็น ACCESSORY ไม่ได้</h3>
+          <p>พวงมาลัยถูกล็อกอยู่ ให้กดปุ่ม POWER พร้อมกับหมุนพวงมาลัยซ้าย-ขวา</p>
+        </div>
+
+        <div class="item plain" data-text="ปิดระบบไม่ได้ VEHICLE OFF เกียร์ P">
+          <h3>เปลี่ยนจาก ACCESSORY เป็น VEHICLE OFF ไม่ได้</h3>
+          <p>ต้องเลื่อนคันเกียร์ไปที่ <span class="mono">P</span> ก่อน</p>
+        </div>
+
+        <div class="item plain" data-text="แป้นเบรกสั่น ABS ปกติ">
+          <h3>แป้นเบรกสั่นเป็นจังหวะตอนเหยียบ</h3>
+          <p>เป็นอาการที่ ABS กำลังทำงาน ไม่ใช่ความบกพร่อง ให้เหยียบค้างด้วยแรงมั่นคง <strong>ห้ามย้ำเบรก</strong></p>
+        </div>
+
+        <div class="item plain" data-text="เปิดประตูหลังจากด้านในไม่ได้ ล็อกกันเด็ก child lock">
+          <h3>เปิดประตูหลังจากด้านในไม่ได้</h3>
+          <p>ล็อกป้องกันเด็กถูกเปิดใช้งานอยู่ ให้เปิดจากมือเปิดด้านนอก และดันก้านล็อกที่ขอบประตูขึ้นไปตำแหน่งปลดล็อกเพื่อยกเลิก</p>
+        </div>
+
+        <div class="item plain" data-text="ประตูล็อกเองหลังปลดล็อก 30 วินาที">
+          <h3>ปลดล็อกด้วยสมาร์ทคีย์แล้วประตูล็อกเองอีกรอบ</h3>
+          <p>ถ้าไม่เปิดประตูภายใน <strong>30 วินาที</strong> รถจะล็อกกลับเองเพื่อความปลอดภัย</p>
+        </div>
+
+        <div class="item plain" data-text="เสียงปี๊บเปิดประตูคนขับ ACCESSORY ไฟหน้าเปิดค้าง">
+          <h3>มีเสียงปี๊บตอนเปิดประตูฝั่งคนขับ</h3>
+          <p>เกิดเมื่อโหมดจ่ายไฟค้างที่ ACCESSORY หรือไฟหน้ายังเปิดอยู่</p>
+        </div>
+
+        <div class="item plain" data-text="เสียงปี๊บตอนออกรถ เข็มขัดนิรภัย">
+          <h3>มีเสียงปี๊บตอนเริ่มออกรถ</h3>
+          <p>มีคนขับ ผู้โดยสารหน้า หรือผู้โดยสารหลังที่ยังไม่คาดเข็มขัดนิรภัย</p>
+        </div>
+
+        <div class="item plain" data-text="ปลดเบรกมือไม่ได้ กดสวิตช์ เหยียบเบรก">
+          <h3>กดสวิตช์เบรกมือไฟฟ้าแล้วปลดไม่ออก</h3>
+          <p>ต้องกดสวิตช์<strong>พร้อมกับเหยียบแป้นเบรก</strong>ไปด้วย</p>
+        </div>
+
+        <div class="item plain" data-text="เหยียบคันเร่งแล้วเบรกมือไม่ปลดอัตโนมัติ">
+          <h3>เหยียบคันเร่งแล้วเบรกมือไม่ปลดเอง</h3>
+          <p>ตรวจว่า<strong>คาดเข็มขัดนิรภัยฝั่งคนขับแล้ว</strong> และเกียร์ไม่ได้อยู่ที่ P หรือ N</p>
+        </div>
+
+        <div class="item plain" data-text="เสียงหวีดเมื่อเหยียบเบรก ผ้าเบรก">
+          <h3>ได้ยินเสียงหวีดเมื่อเหยียบเบรก</h3>
+          <p>อาจถึงเวลาเปลี่ยนผ้าเบรก ให้นำรถเข้าตรวจที่ศูนย์บริการ</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 11 ============ -->
+    <section id="spec">
+      <div class="sechead">
+        <h2>ตัวเลขสำคัญ</h2>
+        <div class="src">ข้อมูลทางเทคนิค · คู่มือ น.510–514</div>
+      </div>
+      <div class="stack">
+
+        <div class="item" data-text="สเปค ของเหลว ความจุ น้ำมันเครื่อง 0W-20 ATF DW-1 DOT">
+          <h3>ของเหลวและความจุ</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>รายการ</th><th>ชนิดที่กำหนด</th><th>ความจุ</th></tr></thead>
+              <tbody>
+                <tr><td>น้ำมันเชื้อเพลิง</td><td>เบนซินไร้สารตะกั่ว/แก๊สโซฮอล์ สูงสุด E20 · ออกเทน 91 ขึ้นไป</td><td class="num">40 ลิตร</td></tr>
+                <tr><td>น้ำมันเครื่อง</td><td>ฮอนด้าแท้ 0W-20 หรือ API SN ขึ้นไป 0W-20</td><td class="num">3.1 ลิตร<br>3.3 ลิตร พร้อมกรอง</td></tr>
+                <tr><td>น้ำมันเกียร์</td><td>Honda ATF DW-1</td><td class="num">1.8 ลิตร</td></tr>
+                <tr><td>สารหล่อเย็น</td><td>Honda All Season Antifreeze/Coolant Type 2 (ผสม 50/50 มาแล้ว)</td><td class="num">3.85 ลิตร</td></tr>
+                <tr><td>น้ำมันเบรก</td><td>DOT 3 หรือ DOT 4</td><td class="num">—</td></tr>
+                <tr><td>น้ำฉีดล้างกระจก</td><td>น้ำยาล้างกระจกทั่วไป</td><td class="num">1.8 ลิตร</td></tr>
+                <tr><td>สารทำความเย็นแอร์</td><td>HFC-134a (R-134a)</td><td class="num">405–455 กรัม</td></tr>
+                <tr><td>แบตเตอรี่ 12 โวลต์</td><td>27AH(5) / 30AH(20)</td><td class="num">—</td></tr>
+                <tr><td>แบตเตอรี่สมาร์ทคีย์</td><td>CR2032</td><td class="num">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="item" data-text="ขนาดรถ น้ำหนัก ยาง ล้อ เครื่องยนต์ หัวเทียน">
+          <h3>ตัวรถ เครื่องยนต์ และยาง</h3>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>รายการ</th><th>ค่า</th></tr></thead>
+              <tbody>
+                <tr><td>น้ำหนักรถเปล่า</td><td class="num">1,231–1,237 กก.</td></tr>
+                <tr><td>น้ำหนักสูงสุดที่รับได้</td><td class="num">1,670 กก. (เพลาหน้า 925 · เพลาหลัง 750 กก.)</td></tr>
+                <tr><td>ยาว × กว้าง × สูง</td><td class="num">4,362 หรือ 4,372 × 1,748 × 1,501 มม.</td></tr>
+                <tr><td>ระยะฐานล้อ</td><td class="num">2,589 มม.</td></tr>
+                <tr><td>เครื่องยนต์</td><td class="num">เบนซิน 4 สูบ DOHC 1,498 ซม.³ · 73.0 × 89.5 มม. · อัตราส่วนกำลังอัด 13.5 : 1</td></tr>
+                <tr><td>หัวเทียน</td><td class="num">NGK DILZKAR7C11H / DENSO DXE22HCR11H</td></tr>
+                <tr><td>ยางมาตรฐาน · ล้อ</td><td class="num">185/60R16 86H · ล้อ 16 × 6J</td></tr>
+                <tr><td>ลมยาง</td><td class="num">ดูป้ายที่ขอบประตูฝั่งคนขับ</td></tr>
+                <tr><td>เบรก</td><td class="num">หน้าดิสก์มีช่องระบายความร้อน · หลังดิสก์ตัน · เบรกมือไฟฟ้า</td></tr>
+                <tr><td>ไฟเลี้ยวหลัง / ไฟถอย / ไฟเลี้ยวข้างซุ้มล้อ</td><td class="num">WY21W 21 W · W16W 16 W · WY5W 5 W (ที่เหลือเป็น LED)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">ไฟหน้า ไฟเลี้ยวหน้า ไฟหรี่/เดย์ไลท์ ไฟเบรก และไฟท้าย เป็น LED ทั้งหมด ต้องให้ศูนย์บริการเป็นผู้ตรวจและเปลี่ยน</p>
+        </div>
+
+        <div class="item" data-text="เบอร์โทร ศูนย์บริการ ฮอนด้า ช่วยเหลือฉุกเฉิน">
+          <h3>เบอร์ที่ควรบันทึกไว้</h3>
+          <dl class="kv">
+            <dt>ช่วยเหลือฉุกเฉินนอกสถานที่ 24 ชม.</dt><dd><strong>02-111-1234</strong></dd>
+            <dt>ศูนย์บริการข้อมูลฮอนด้า 24 ชม.</dt><dd><strong>0-2341-7777</strong></dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <p class="empty" id="empty">ไม่พบหัวข้อที่ตรงกับคำค้น ลองใช้คำอื่น เช่น “เบรก” “ยาง” “ไฟเตือน”</p>
+
+    <footer>
+      สรุปจาก “สมุดรับประกันและคู่มือผู้ใช้รถ Honda City Hatchback e:HEV” เพื่อใช้อ่านทบทวนอย่างรวดเร็วเท่านั้น
+      หน้านี้ตัดรายละเอียดจำนวนมากออกไป เช่น การติดตั้งเบาะนั่งเด็ก ถุงลมนิรภัย และขั้นตอนเชิงลึกอื่นๆ
+      เมื่อต้องตัดสินใจจริง ให้ยึดตามคู่มือเล่มจริงและศูนย์บริการฮอนด้าเป็นหลักเสมอ
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var hits = document.getElementById('hits');
+  var empty = document.getElementById('empty');
+  var items = Array.prototype.slice.call(document.querySelectorAll('.item'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+
+  items.forEach(function(el){
+    el.dataset.hay = ((el.dataset.text || '') + ' ' + el.textContent).toLowerCase();
+  });
+
+  function run(){
+    var term = q.value.trim().toLowerCase();
+    if(!term){
+      items.forEach(function(el){ el.classList.remove('is-hidden'); });
+      sections.forEach(function(s){ s.classList.remove('is-hidden'); });
+      hits.textContent = '';
+      empty.style.display = 'none';
+      return;
+    }
+    var words = term.split(/\s+/);
+    var found = 0;
+    items.forEach(function(el){
+      var ok = words.every(function(w){ return el.dataset.hay.indexOf(w) !== -1; });
+      el.classList.toggle('is-hidden', !ok);
+      if(ok) found++;
+    });
+    sections.forEach(function(s){
+      var any = s.querySelector('.item:not(.is-hidden)');
+      s.classList.toggle('is-hidden', !any);
+    });
+    hits.textContent = found + ' หัวข้อ';
+    empty.style.display = found ? 'none' : 'block';
+  }
+
+  q.addEventListener('input', run);
+  q.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ q.value = ''; run(); }
+  });
+})();
+</script>
