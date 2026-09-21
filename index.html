@@ -215,13 +215,40 @@ thead th{
 tbody tr:last-child td{border-bottom:0}
 td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 
-/* lamp chip */
-.lamp{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:12.5px;color:var(--ink-2)}
-.lamp::before{content:"";width:9px;height:9px;border-radius:50%;flex:0 0 auto}
-.lamp.red::before{background:var(--lamp-red);box-shadow:0 0 0 3px color-mix(in srgb,var(--lamp-red) 18%,transparent)}
-.lamp.amber::before{background:var(--lamp-amber);box-shadow:0 0 0 3px color-mix(in srgb,var(--lamp-amber) 18%,transparent)}
-.lamp.green::before{background:var(--lamp-green);box-shadow:0 0 0 3px color-mix(in srgb,var(--lamp-green) 18%,transparent)}
-.lamp.grey::before{background:var(--lamp-grey)}
+/* lamp chip + สัญลักษณ์ไฟเตือน */
+.lamp{display:inline-flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--ink-2);line-height:1.5;min-width:11em}
+.ico{
+  flex:0 0 auto;width:23px;height:23px;margin-top:-1px;
+  fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+  color:var(--ic,var(--ink-2));
+}
+.ico .fl{fill:currentColor;stroke:none}
+.ico .tx{fill:currentColor;stroke:none;font-family:var(--f-display);font-weight:700;font-size:7px;text-anchor:middle}
+.lamp.red{--ic:var(--lamp-red)}
+.lamp.amber{--ic:var(--lamp-amber)}
+.lamp.green{--ic:var(--lamp-green)}
+.lamp.grey{--ic:var(--lamp-grey)}
+
+/* ไดอะแกรม */
+figure{margin:16px 0 0;padding:0}
+figure svg{display:block;width:100%;max-width:100%;height:auto}
+figcaption{margin-top:9px;font-size:13px;color:var(--ink-3);max-width:62ch}
+.dg-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;background:var(--surface);padding:16px 14px}
+.dg{min-width:440px}
+.dg .bx{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.2}
+.dg .bx-dim{fill:none;stroke:var(--line-strong);stroke-width:1.2;opacity:.45}
+.dg .car{fill:var(--surface-2);stroke:var(--ink-3);stroke-width:1.2}
+.dg .car-me{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.4}
+.dg .on{stroke:var(--accent);stroke-width:2.2;fill:none}
+.dg .off{stroke:var(--ink-3);stroke-width:1.3;fill:none;opacity:.4}
+.dg .rule{stroke:var(--line-strong);stroke-width:1;fill:none}
+.dg .dash{stroke:var(--line-strong);stroke-width:1.2;fill:none;stroke-dasharray:6 7}
+.dg text{fill:var(--ink-2);font-family:var(--f-body);font-size:12px}
+.dg .ttl{fill:var(--ink);font-family:var(--f-display);font-weight:600;font-size:13px}
+.dg .sm{font-size:11px;fill:var(--ink-3)}
+.dg .key{fill:var(--accent);font-family:var(--f-display);font-weight:700;font-size:13px}
+.dg .mk-on{fill:var(--accent)}
+.dg .mk-off{fill:var(--ink-3);opacity:.4}
 
 .urgency{font-family:var(--f-display);font-weight:600;font-size:12.5px}
 .u-stop{color:var(--lamp-red)}
@@ -262,6 +289,82 @@ footer{
 }
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
+
+<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true">
+  <symbol id="i-brake" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="6"/><path d="M12 8.6v4"/><circle class="fl" cx="12" cy="15.3" r=".95"/>
+    <path d="M4 6.6a12 12 0 0 0 0 10.8"/><path d="M20 6.6a12 12 0 0 1 0 10.8"/>
+  </symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24">
+    <rect x="2.5" y="7.5" width="19" height="11" rx="1.6"/>
+    <path d="M7 7.5V5.5h3v2M14 7.5V5.5h3v2"/>
+    <path d="M6.6 13h3.2M8.2 11.4v3.2M14.2 13h3.2"/>
+  </symbol>
+  <symbol id="i-oil" viewBox="0 0 24 24">
+    <path d="M2.5 17v-5.2h9.2l3.4-2.6v2.6h3.4l3 1.8V17a1.4 1.4 0 0 1-1.4 1.4H3.9A1.4 1.4 0 0 1 2.5 17z"/>
+    <path d="M7.4 9.6S5 7 5 5.7 6.1 3.6 7.4 3.6 9.8 4.5 9.8 5.7 7.4 9.6 7.4 9.6z"/>
+  </symbol>
+  <symbol id="i-airbag" viewBox="0 0 24 24">
+    <circle cx="6.6" cy="6" r="2.2"/><path d="M3.2 19v-4.4a3 3 0 0 1 3-3h1.6l2.4 2.8"/>
+    <path d="M2.6 19h5.6"/><circle cx="16.8" cy="13.4" r="4.6"/>
+  </symbol>
+  <symbol id="i-belt" viewBox="0 0 24 24">
+    <circle cx="8.6" cy="5.4" r="2.3"/><path d="M5.2 19.4v-5a3 3 0 0 1 3-3h2.2"/>
+    <path d="M5.6 10.2 16.2 19.4"/><path d="M11.6 14.6l3.4-1.6"/>
+  </symbol>
+  <symbol id="i-engine" viewBox="0 0 24 24">
+    <path d="M3 10.4h2.2V8h3.4v2.4h4.6l2.8 2.8h2.6v4.4h-2.6l-2 1.8H8.6l-2.2-1.8H3z"/>
+    <path d="M6.4 8V6.2h5V8"/><path d="M19 12.4v-2h2.4"/>
+  </symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24">
+    <path class="fl" d="M13.6 2.2 6.2 13.4h5.1l-1.1 8.4 7.8-11.8h-5.2z"/>
+  </symbol>
+  <symbol id="i-steer" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="2.4"/>
+    <path d="M12 9.6V3.8M9.9 13.1 4.5 16.4M14.1 13.1l5.4 3.3"/>
+  </symbol>
+  <symbol id="i-cog" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4.4"/>
+    <path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1M5.8 5.8l2.2 2.2M16 16l2.2 2.2M18.2 5.8 16 8M8 16l-2.2 2.2"/>
+  </symbol>
+  <symbol id="i-abs" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8"/><text class="tx" x="12" y="14.6">ABS</text>
+    <path d="M12 2.4v1.8M12 19.8v1.8M2.4 12h1.8M19.8 12h1.8"/>
+  </symbol>
+  <symbol id="i-vsa" viewBox="0 0 24 24">
+    <path d="M6 15.6h12l-1.4-4a2 2 0 0 0-1.9-1.4H9.3a2 2 0 0 0-1.9 1.4z"/>
+    <circle class="fl" cx="8.4" cy="17.6" r="1.1"/><circle class="fl" cx="15.6" cy="17.6" r="1.1"/>
+    <path d="M4.4 7.4c1.8 0 1.8-2 3.6-2M16 5.4c1.8 0 1.8 2 3.6 2"/>
+  </symbol>
+  <symbol id="i-radar" viewBox="0 0 24 24">
+    <path d="M3.4 17.4h8.4l-1.2-3.6a1.9 1.9 0 0 0-1.8-1.3H6.4a1.9 1.9 0 0 0-1.8 1.3z"/>
+    <circle class="fl" cx="5.6" cy="19.2" r="1"/><circle class="fl" cx="9.6" cy="19.2" r="1"/>
+    <path d="M14.6 12.4a4.4 4.4 0 0 0 0-6.2M17.4 15a8.4 8.4 0 0 0 0-11.4"/>
+  </symbol>
+  <symbol id="i-fuel" viewBox="0 0 24 24">
+    <rect x="3.2" y="3.6" width="10" height="16.8" rx="1.6"/>
+    <path d="M5.6 7.4h5.2v3.6H5.6z"/>
+    <path d="M13.2 8.4h4a1.6 1.6 0 0 1 1.6 1.6v6a1.5 1.5 0 0 0 3 0V8.2l-2.4-2.6"/>
+  </symbol>
+  <symbol id="i-key" viewBox="0 0 24 24">
+    <circle cx="7.6" cy="8.4" r="4"/><circle class="fl" cx="7.6" cy="8.4" r="1.1"/>
+    <path d="M10.4 11.2 19 19.8"/><path d="M15.4 16.2 17.6 14M17.8 18.6 20 16.4"/>
+  </symbol>
+  <symbol id="i-power" viewBox="0 0 24 24">
+    <path d="M7.4 5.6a8 8 0 1 0 9.2 0"/><path d="M12 2.6v8"/>
+  </symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24">
+    <path d="M20.4 3.6C9.6 3.6 4.4 8.4 4.4 14.4a6 6 0 0 0 1.4 4c3.6-7.2 8.6-9.6 12-10.4-3 1.8-7 5.4-9.4 11.2a6.6 6.6 0 0 0 2.6.6c6 0 9.4-5.4 9.4-16.2z"/>
+  </symbol>
+  <symbol id="i-lane" viewBox="0 0 24 24">
+    <path d="M9 15.6h6l-.9-2.9a1.6 1.6 0 0 0-1.5-1.1h-1.2a1.6 1.6 0 0 0-1.5 1.1z"/>
+    <circle class="fl" cx="10.4" cy="17.2" r=".9"/><circle class="fl" cx="13.6" cy="17.2" r=".9"/>
+    <path d="M4.6 3.4v4M4.6 10.4v4M4.6 17.4v3M19.4 3.4v4M19.4 10.4v4M19.4 17.4v3"/>
+  </symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24">
+    <path d="M5.6 7.4 12 13.2l6.4-5.8"/><path d="M5.6 13.4 12 19.2l6.4-5.8"/>
+  </symbol>
+</svg>
 
 <header class="topbar">
   <div class="topbar-in">
@@ -321,6 +424,71 @@ footer{
             <li><strong>Engine Drive</strong> — วิ่งเร็วคงที่โหลดต่ำ เครื่องยนต์ต่อตรงเข้าล้อ ซึ่งเป็นช่วงที่ประหยัดที่สุด</li>
             <li><strong>ชาร์จไฟกลับ</strong> — ถอนคันเร่งหรือแตะเบรก มอเตอร์กลายเป็นเครื่องปั่นไฟคืนเข้าแบตเตอรี่</li>
           </ul>
+
+          <figure>
+            <div class="dg-wrap">
+              <svg class="dg" viewBox="0 0 730 156" role="img" aria-label="ผังการไหลของพลังงานในโหมดทำงาน 4 แบบของระบบ e:HEV ตั้งแต่ไฟฟ้าล้วน ไฮบริด เครื่องยนต์ต่อตรง และการชาร์จไฟกลับ">
+                <defs>
+                  <marker id="ar1on" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><polygon class="mk-on" points="0,0 9,3.5 0,7"/></marker>
+                  <marker id="ar1off" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><polygon class="mk-off" points="0,0 9,3.5 0,7"/></marker>
+                </defs>
+                <line class="rule" x1="179" y1="6" x2="179" y2="150"/>
+                <line class="rule" x1="365" y1="6" x2="365" y2="150"/>
+                <line class="rule" x1="551" y1="6" x2="551" y2="150"/>
+
+                <g transform="translate(0,0)">
+                  <text class="ttl" x="0" y="12">EV — ไฟฟ้าล้วน</text>
+                  <rect class="bx-dim" x="2" y="24" width="54" height="24" rx="4"/><text class="sm" x="29" y="40" text-anchor="middle">ENG</text>
+                  <rect class="bx" x="72" y="54" width="50" height="24" rx="4"/><text x="97" y="70" text-anchor="middle">MOT</text>
+                  <rect class="bx" x="2" y="84" width="54" height="24" rx="4"/><text x="29" y="100" text-anchor="middle">BATT</text>
+                  <circle class="bx" cx="152" cy="66" r="15"/><circle class="bx" cx="152" cy="66" r="5"/><text class="sm" x="152" y="100" text-anchor="middle">ล้อ</text>
+                  <line class="on" x1="57" y1="92" x2="70" y2="76" marker-end="url(#ar1on)"/>
+                  <line class="on" x1="124" y1="66" x2="134" y2="66" marker-end="url(#ar1on)"/>
+                  <text class="sm" x="0" y="128">จอดนิ่งหรือคลานช้า</text>
+                  <text class="sm" x="0" y="143">มอเตอร์ขับล้ออย่างเดียว</text>
+                </g>
+
+                <g transform="translate(186,0)">
+                  <text class="ttl" x="0" y="12">Hybrid — โหลดสูง</text>
+                  <rect class="bx" x="2" y="24" width="54" height="24" rx="4"/><text x="29" y="40" text-anchor="middle">ENG</text>
+                  <rect class="bx" x="72" y="54" width="50" height="24" rx="4"/><text x="97" y="70" text-anchor="middle">MOT</text>
+                  <rect class="bx" x="2" y="84" width="54" height="24" rx="4"/><text x="29" y="100" text-anchor="middle">BATT</text>
+                  <circle class="bx" cx="152" cy="66" r="15"/><circle class="bx" cx="152" cy="66" r="5"/><text class="sm" x="152" y="100" text-anchor="middle">ล้อ</text>
+                  <line class="on" x1="57" y1="42" x2="70" y2="58" marker-end="url(#ar1on)"/>
+                  <line class="on" x1="57" y1="92" x2="70" y2="76" marker-end="url(#ar1on)"/>
+                  <line class="on" x1="124" y1="66" x2="134" y2="66" marker-end="url(#ar1on)"/>
+                  <text class="sm" x="0" y="128">เร่งแซง ขึ้นทางชัน</text>
+                  <text class="sm" x="0" y="143">เครื่องปั่นไฟป้อนมอเตอร์</text>
+                </g>
+
+                <g transform="translate(372,0)">
+                  <text class="ttl" x="0" y="12">Engine Drive</text>
+                  <rect class="bx" x="2" y="24" width="54" height="24" rx="4"/><text x="29" y="40" text-anchor="middle">ENG</text>
+                  <rect class="bx" x="72" y="54" width="50" height="24" rx="4"/><text x="97" y="70" text-anchor="middle">MOT</text>
+                  <rect class="bx" x="2" y="84" width="54" height="24" rx="4"/><text x="29" y="100" text-anchor="middle">BATT</text>
+                  <circle class="bx" cx="152" cy="66" r="15"/><circle class="bx" cx="152" cy="66" r="5"/><text class="sm" x="152" y="100" text-anchor="middle">ล้อ</text>
+                  <path class="on" d="M58 30 C 98 16 134 20 149 48" marker-end="url(#ar1on)"/>
+                  <line class="off" x1="57" y1="92" x2="70" y2="76" marker-end="url(#ar1off)"/>
+                  <line class="off" x1="124" y1="66" x2="134" y2="66" marker-end="url(#ar1off)"/>
+                  <text class="sm" x="0" y="128">เร็วคงที่ โหลดต่ำ</text>
+                  <text class="sm" x="0" y="143">เครื่องต่อตรงเข้าล้อ</text>
+                </g>
+
+                <g transform="translate(558,0)">
+                  <text class="ttl" x="0" y="12">ชาร์จไฟกลับ</text>
+                  <rect class="bx-dim" x="2" y="24" width="54" height="24" rx="4"/><text class="sm" x="29" y="40" text-anchor="middle">ENG</text>
+                  <rect class="bx" x="72" y="54" width="50" height="24" rx="4"/><text x="97" y="70" text-anchor="middle">MOT</text>
+                  <rect class="bx" x="2" y="84" width="54" height="24" rx="4"/><text x="29" y="100" text-anchor="middle">BATT</text>
+                  <circle class="bx" cx="152" cy="66" r="15"/><circle class="bx" cx="152" cy="66" r="5"/><text class="sm" x="152" y="100" text-anchor="middle">ล้อ</text>
+                  <line class="on" x1="134" y1="66" x2="124" y2="66" marker-end="url(#ar1on)"/>
+                  <line class="on" x1="70" y1="76" x2="57" y2="92" marker-end="url(#ar1on)"/>
+                  <text class="sm" x="0" y="128">ถอนคันเร่งหรือแตะเบรก</text>
+                  <text class="sm" x="0" y="143">มอเตอร์ปั่นไฟคืนแบตเตอรี่</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption>ล้อถูกขับด้วยมอเตอร์เกือบตลอดเวลา เครื่องยนต์ต่อตรงเข้าล้อเฉพาะตอนวิ่งเร็วคงที่โหลดต่ำเท่านั้น — ENG เครื่องยนต์ · MOT มอเตอร์ · BATT แบตเตอรี่แรงเคลื่อนไฟฟ้าสูง</figcaption>
+          </figure>
         </div>
 
         <div class="item" data-text="เสียง เครื่องยนต์ ดับเอง สตาร์ตเอง auto stop ผิดปกติ">
@@ -392,6 +560,39 @@ footer{
             <li>ดึงก้านขวาค้าง <strong>2–3 วินาที</strong> = ยกเลิกการทำงาน</li>
             <li>ถ้าดึงขณะใช้ ACC อยู่ ระบบ ACC จะถูกยกเลิกอัตโนมัติ</li>
           </ul>
+          <figure>
+            <div class="dg-wrap">
+              <svg class="dg" viewBox="0 0 620 196" role="img" aria-label="ผังพวงมาลัยแสดงว่าก้านซ้ายเครื่องหมายลบเพิ่มการชะลอความเร็ว ส่วนก้านขวาเครื่องหมายบวกลดการชะลอ ปรับได้สามระดับ">
+                <g>
+                  <rect class="car-me" x="34" y="56" width="24" height="52" rx="8"/>
+                  <rect class="bx" x="164" y="56" width="24" height="52" rx="8"/>
+                  <circle class="bx" cx="111" cy="98" r="54" style="stroke-width:3"/>
+                  <circle class="bx" cx="111" cy="98" r="17"/>
+                  <path class="rule" d="M94 98H57M128 98h37M111 115v37"/>
+                  <text class="key" x="46" y="88" text-anchor="middle" style="font-size:20px">−</text>
+                  <text x="176" y="88" text-anchor="middle" style="font-size:19px">+</text>
+                  <text class="sm" x="111" y="180" text-anchor="middle">มองจากด้านหลังพวงมาลัย</text>
+                </g>
+
+                <g transform="translate(248,0)">
+                  <text class="key" x="0" y="42" style="font-size:18px">−</text>
+                  <text class="ttl" x="20" y="42">ก้านซ้าย — ดึงเข้าหาตัว</text>
+                  <text x="20" y="62">ชะลอ<tspan class="key" dx="3" dy="0">มากขึ้น</tspan> หน่วงหนักขึ้น ชาร์จไฟคืนมากขึ้น</text>
+
+                  <line class="rule" x1="0" y1="84" x2="360" y2="84"/>
+
+                  <text x="0" y="114" style="font-size:18px">+</text>
+                  <text class="ttl" x="20" y="114">ก้านขวา — ดึงเข้าหาตัว</text>
+                  <text x="20" y="134">ชะลอน้อยลง จนกลับไปไหลอิสระ</text>
+
+                  <line class="rule" x1="0" y1="156" x2="360" y2="156"/>
+                  <text class="sm" x="0" y="180">ดึงก้านขวาค้าง 2–3 วินาที = ยกเลิกทั้งหมด</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption>ทิศทางตรงข้ามกับแพดเดิลเปลี่ยนเกียร์ที่คุ้นเคย — ที่รถคันนี้ <strong>ซ้ายคือหน่วงมากขึ้น</strong> ไม่ใช่เกียร์ลง ปรับไล่ได้ทีละขั้นรวม 3 ระดับ</figcaption>
+          </figure>
+
           <p class="note">ระดับอาจไม่เปลี่ยนและไอคอนจะกะพริบ เมื่อแบตเตอรี่แรงสูงเต็มแล้ว หรืออุณหภูมิแบตเตอรี่สูง/ต่ำเกินไป</p>
           <div class="warn"><b>ระวัง</b><span>ถนนลื่นแล้วเพิ่มระดับการชะลอแบบฉับพลัน ยางอาจลื่นไถลได้ ให้ค่อยๆ เพิ่มทีละระดับ</span></div>
         </div>
@@ -531,37 +732,37 @@ footer{
               <thead><tr><th>ไฟเตือน</th><th>หมายถึง</th><th>ต้องทำ</th></tr></thead>
               <tbody>
                 <tr>
-                  <td><span class="lamp red">เบรก (แดง) ติดค้าง</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-brake"/></svg><span>เบรก (แดง) ติดค้าง</span></span></td>
                   <td>น้ำมันเบรกต่ำ หรือระบบเบรกผิดปกติ</td>
                   <td><span class="urgency u-stop">จอดทันที</span><br>เช็กก่อนว่าปลดเบรกมือแล้ว จากนั้นแตะเบรกดูแรงต้าน ถ้าผิดปกติให้ดึงแพดเดิลซ้ายช่วยชะลอ แล้วหยุดรถ</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp red">เบรกแดง + เบรกเหลืองพร้อมกัน</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-brake"/></svg><span>เบรกแดง + เบรกเหลืองพร้อมกัน</span></span></td>
                   <td>ระบบเบรกบกพร่อง แป้นเบรกจะหนักกว่าปกติ</td>
                   <td><span class="urgency u-stop">จอดทันที</span><br>ต้องออกแรงเหยียบเบรกมากกว่าเดิม เข้าเกียร์ P กันรถไหล แล้วเรียกศูนย์</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp red">เบรกแดงกะพริบ + เบรกเหลืองติด</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-brake"/></svg><span>เบรกแดงกะพริบ + เบรกเหลืองติด</span></span></td>
                   <td>เบรกมือไฟฟ้าบกพร่อง อาจใช้ไม่ได้</td>
                   <td><span class="urgency u-soon">เข้าศูนย์ทันที</span><br>เลี่ยงการใช้เบรกมือ</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp red">ระบบชาร์จแบตเตอรี่ 12 โวลต์</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-battery"/></svg><span>ระบบชาร์จแบตเตอรี่ 12 โวลต์</span></span></td>
                   <td>ระบบชาร์จไฟบกพร่อง</td>
                   <td><span class="urgency u-stop">จอดและเรียกศูนย์</span><br>ถ้าจำเป็นต้องหยุดชั่วคราว <strong>อย่าดับเครื่อง</strong> เพราะอาจสตาร์ตไม่ติดอีก</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp red">แรงดันน้ำมันเครื่องต่ำ</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-oil"/></svg><span>แรงดันน้ำมันเครื่องต่ำ</span></span></td>
                   <td>แรงดันน้ำมันเครื่องต่ำ</td>
                   <td><span class="urgency u-stop">จอดบนพื้นราบทันที</span><br>ดับเครื่องรอ 3 นาที เช็กระดับน้ำมันเครื่อง ถ้าสตาร์ตแล้วไฟยังไม่ดับ ให้ดับเครื่องทันทีและเรียกศูนย์</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp red">ระบบถุงลม (SRS)</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-airbag"/></svg><span>ระบบถุงลม (SRS)</span></span></td>
                   <td>ถุงลม ม่านถุงลม หรือตัวดึงเข็มขัดบกพร่อง</td>
                   <td><span class="urgency u-soon">เข้าศูนย์</span></td>
                 </tr>
                 <tr>
-                  <td><span class="lamp red">เข็มขัดนิรภัย</span></td>
+                  <td><span class="lamp red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-belt"/></svg><span>เข็มขัดนิรภัย</span></span></td>
                   <td>มีคนไม่คาดเข็มขัด หรือปลดระหว่างขับ</td>
                   <td>คาดให้ครบ ถ้าคาดแล้วยังติดค้าง แสดงว่าเซ็นเซอร์ผิดพลาด ให้เข้าศูนย์</td>
                 </tr>
@@ -577,52 +778,52 @@ footer{
               <thead><tr><th>ไฟเตือน</th><th>หมายถึง</th><th>ต้องทำ</th></tr></thead>
               <tbody>
                 <tr>
-                  <td><span class="lamp amber">เครื่องยนต์ทำงานบกพร่อง — ติดค้าง</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-engine"/></svg><span>เครื่องยนต์ทำงานบกพร่อง — ติดค้าง</span></span></td>
                   <td>ระบบควบคุมไอเสียหรือระบบรถยนต์ไฟฟ้าบกพร่อง</td>
                   <td>เลี่ยงความเร็วสูง เข้าศูนย์ทันที<br><em>ถ้าเพิ่งน้ำมันหมดถัง ไฟอาจดับเองหลังเติมและขับไปหลายรอบ</em></td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">เครื่องยนต์ทำงานบกพร่อง — กะพริบ</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-engine"/></svg><span>เครื่องยนต์ทำงานบกพร่อง — กะพริบ</span></span></td>
                   <td>จุดระเบิดไม่ครบสูบ</td>
                   <td><span class="urgency u-stop">จอดในที่ไม่มีวัตถุไวไฟ</span> ดับเครื่องรออย่างน้อย 10 นาทีให้เย็นลง ถ้าสตาร์ตแล้วยังกะพริบ ให้ขับไม่เกิน <strong>50 กม./ชม.</strong> ไปศูนย์ที่ใกล้ที่สุด</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">ระบบไฟฟ้า (e:HEV)</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bolt"/></svg><span>ระบบไฟฟ้า (e:HEV)</span></span></td>
                   <td>ระบบรถยนต์ไฟฟ้าบกพร่อง</td>
                   <td>เข้าศูนย์ทันที · ถ้าขึ้นข้อความ <span class="mono">Stop Driving When Safe</span> ให้จอดทันที</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">พวงมาลัยพาวเวอร์ (EPS)</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-steer"/></svg><span>พวงมาลัยพาวเวอร์ (EPS)</span></span></td>
                   <td>ระบบพวงมาลัยไฟฟ้าบกพร่อง</td>
                   <td>จอดแล้วสตาร์ตใหม่ ถ้ายังติดให้เข้าศูนย์ · ขึ้น <span class="mono">Do Not Drive</span> = จอดทันที</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">ระบบเกียร์ — กะพริบ</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cog"/></svg><span>ระบบเกียร์ — กะพริบ</span></span></td>
                   <td>ระบบเกียร์บกพร่อง</td>
                   <td>เลี่ยงการเร่งกะทันหัน เข้าศูนย์ทันที · ขึ้น <span class="mono">Do Not Drive</span> = จอดทันที</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">ABS ติดค้าง</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-abs"/></svg><span>ABS ติดค้าง</span></span></td>
                   <td>ระบบป้องกันล้อล็อกบกพร่อง</td>
                   <td>เบรกยังทำงานปกติ แต่ไม่มี ABS ให้เข้าศูนย์</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">VSA ติดค้าง</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-vsa"/></svg><span>VSA ติดค้าง</span></span></td>
                   <td>ระบบทรงตัว/ช่วยออกตัวทางชันบกพร่อง</td>
                   <td>เข้าศูนย์</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">ระบบสนับสนุนการขับขี่</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-radar"/></svg><span>ระบบสนับสนุนการขับขี่</span></span></td>
                   <td>CMBS หรือ RDM ใช้งานไม่ได้ชั่วคราว</td>
                   <td>มักเกิดจาก<strong>กล้องหน้าสกปรกหรือร้อนเกินไป</strong> ให้จอดเช็ดกระจกบริเวณกล้องด้วยผ้านุ่ม หรือเปิดแอร์ระบายความร้อนกล้อง</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">ระดับน้ำมันเชื้อเพลิงต่ำ</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fuel"/></svg><span>ระดับน้ำมันเชื้อเพลิงต่ำ</span></span></td>
                   <td>เหลือประมาณ 5.3 ลิตร</td>
                   <td>เติมน้ำมันโดยเร็ว · ถ้า<strong>กะพริบ</strong> แสดงว่ามาตรวัดเสีย ให้เข้าศูนย์</td>
                 </tr>
                 <tr>
-                  <td><span class="lamp amber">Immobilizer กะพริบ</span></td>
+                  <td><span class="lamp amber"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg><span>Immobilizer กะพริบ</span></span></td>
                   <td>ระบบอ่านข้อมูลกุญแจไม่ได้</td>
                   <td>ปรับเป็น VEHICLE OFF แล้วเลือก ON ใหม่ ถ้ายังกะพริบซ้ำๆ ให้เข้าศูนย์</td>
                 </tr>
@@ -638,12 +839,12 @@ footer{
             <table>
               <thead><tr><th>ไฟเตือน</th><th>หมายถึง</th></tr></thead>
               <tbody>
-                <tr><td><span class="lamp green">READY</span></td><td>รถพร้อมขับแล้ว ถือเป็นตัวชี้ขาดแทนเสียงเครื่องยนต์</td></tr>
-                <tr><td><span class="lamp green">โหมด EV</span></td><td>กำลังวิ่งด้วยมอเตอร์ล้วน เครื่องยนต์ไม่ทำงาน</td></tr>
-                <tr><td><span class="lamp green">ECON</span></td><td>โหมดประหยัดกำลังทำงาน</td></tr>
-                <tr><td><span class="lamp green">ACC / LKAS สีเขียว</span></td><td>ระบบกำลังควบคุมรถอยู่ (สีขาว = พร้อมใช้แต่ยังไม่ทำงาน)</td></tr>
-                <tr><td><span class="lamp grey">CMBS / RDM สีเทา</span></td><td>ระบบถูกปิดอยู่ ตั้งเปิดใหม่ได้ที่เมนูระบบสนับสนุนการขับขี่บนหน้าจอ</td></tr>
-                <tr><td><span class="lamp green">แพดเดิลชะลอความเร็ว</span></td><td>ติดเมื่อกำลังใช้แพดเดิล · <strong>กะพริบ</strong> = ชะลอไม่ตอบสนอง (แบตเตอรี่เต็มหรืออุณหภูมิไม่เหมาะ)</td></tr>
+                <tr><td><span class="lamp green"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-power"/></svg><span>READY</span></span></td><td>รถพร้อมขับแล้ว ถือเป็นตัวชี้ขาดแทนเสียงเครื่องยนต์</td></tr>
+                <tr><td><span class="lamp green"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bolt"/></svg><span>โหมด EV</span></span></td><td>กำลังวิ่งด้วยมอเตอร์ล้วน เครื่องยนต์ไม่ทำงาน</td></tr>
+                <tr><td><span class="lamp green"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-leaf"/></svg><span>ECON</span></span></td><td>โหมดประหยัดกำลังทำงาน</td></tr>
+                <tr><td><span class="lamp green"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lane"/></svg><span>ACC / LKAS สีเขียว</span></span></td><td>ระบบกำลังควบคุมรถอยู่ (สีขาว = พร้อมใช้แต่ยังไม่ทำงาน)</td></tr>
+                <tr><td><span class="lamp grey"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-radar"/></svg><span>CMBS / RDM สีเทา</span></span></td><td>ระบบถูกปิดอยู่ ตั้งเปิดใหม่ได้ที่เมนูระบบสนับสนุนการขับขี่บนหน้าจอ</td></tr>
+                <tr><td><span class="lamp green"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chev"/></svg><span>แพดเดิลชะลอความเร็ว</span></span></td><td>ติดเมื่อกำลังใช้แพดเดิล · <strong>กะพริบ</strong> = ชะลอไม่ตอบสนอง (แบตเตอรี่เต็มหรืออุณหภูมิไม่เหมาะ)</td></tr>
               </tbody>
             </table>
           </div>
@@ -679,7 +880,52 @@ footer{
             <li>ปรับความเร็ว — กดทีละครั้ง ±1 กม./ชม. · กดค้าง ±10 กม./ชม.</li>
             <li>ปรับระยะห่าง — กดปุ่มตั้งระยะวนระหว่าง ไกลมาก / ไกล / ปานกลาง / ใกล้</li>
           </ol>
-          <p class="note">ระยะห่างคิดเป็นเวลาคงที่ ไม่ใช่ระยะคงที่ — ใกล้ 1.2 วิ · ปานกลาง 1.6 วิ · ไกล 2.0 วิ · ไกลมาก 2.4 วิ (ที่ 80 กม./ชม. เท่ากับ 26.6 / 34.6 / 44.0 / 53.6 เมตร ตามลำดับ)</p>
+          <figure>
+            <div class="dg-wrap">
+              <svg class="dg" viewBox="0 0 620 226" role="img" aria-label="เปรียบเทียบระยะห่างจากรถคันหน้าสี่ระดับของระบบ ACC วาดตามสัดส่วนจริง ใกล้ 1.2 วินาที ปานกลาง 1.6 ไกล 2.0 และไกลมาก 2.4 วินาที">
+                <defs>
+                  <marker id="ar3" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><polygon class="mk-off" points="0,0 8,3 0,6"/></marker>
+                </defs>
+
+                <text class="sm" x="0" y="14">การตั้งค่า</text>
+                <text class="sm" x="470" y="14">ระยะจริงที่ 80 กม./ชม.</text>
+                <line class="rule" x1="0" y1="22" x2="620" y2="22"/>
+
+                <g transform="translate(0,46)">
+                  <text class="ttl" x="0" y="4">ใกล้</text><text class="sm" x="0" y="20">1.2 วินาที</text>
+                  <rect class="car-me" x="96" y="-12" width="42" height="17" rx="5"/><rect class="car-me" x="107" y="-19" width="19" height="8" rx="3"/>
+                  <line class="dash" x1="142" y1="-4" x2="236" y2="-4" marker-end="url(#ar3)"/>
+                  <rect class="car" x="240" y="-12" width="42" height="17" rx="5"/><rect class="car" x="251" y="-19" width="19" height="8" rx="3"/>
+                  <text x="470" y="2">26.6 ม.</text>
+                </g>
+
+                <g transform="translate(0,96)">
+                  <text class="ttl" x="0" y="4">ปานกลาง</text><text class="sm" x="0" y="20">1.6 วินาที</text>
+                  <rect class="car-me" x="96" y="-12" width="42" height="17" rx="5"/><rect class="car-me" x="107" y="-19" width="19" height="8" rx="3"/>
+                  <line class="dash" x1="142" y1="-4" x2="270" y2="-4" marker-end="url(#ar3)"/>
+                  <rect class="car" x="274" y="-12" width="42" height="17" rx="5"/><rect class="car" x="285" y="-19" width="19" height="8" rx="3"/>
+                  <text x="470" y="2">34.6 ม.</text>
+                </g>
+
+                <g transform="translate(0,146)">
+                  <text class="ttl" x="0" y="4">ไกล</text><text class="sm" x="0" y="20">2.0 วินาที</text>
+                  <rect class="car-me" x="96" y="-12" width="42" height="17" rx="5"/><rect class="car-me" x="107" y="-19" width="19" height="8" rx="3"/>
+                  <line class="dash" x1="142" y1="-4" x2="304" y2="-4" marker-end="url(#ar3)"/>
+                  <rect class="car" x="308" y="-12" width="42" height="17" rx="5"/><rect class="car" x="319" y="-19" width="19" height="8" rx="3"/>
+                  <text x="470" y="2">44.0 ม.</text>
+                </g>
+
+                <g transform="translate(0,196)">
+                  <text class="ttl" x="0" y="4">ไกลมาก</text><text class="sm" x="0" y="20">2.4 วินาที</text>
+                  <rect class="car-me" x="96" y="-12" width="42" height="17" rx="5"/><rect class="car-me" x="107" y="-19" width="19" height="8" rx="3"/>
+                  <line class="dash" x1="142" y1="-4" x2="338" y2="-4" marker-end="url(#ar3)"/>
+                  <rect class="car" x="342" y="-12" width="42" height="17" rx="5"/><rect class="car" x="353" y="-19" width="19" height="8" rx="3"/>
+                  <text x="470" y="2">53.6 ม.</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption>ระบบรักษาเป็น<strong>ช่วงเวลา ไม่ใช่ระยะคงที่</strong> ยิ่งวิ่งเร็วระยะเป็นเมตรยิ่งถ่างออกเอง กล่องสีน้ำเงินคือรถของคุณ</figcaption>
+          </figure>
           <p><strong>ยกเลิก</strong> ด้วยการกด CANCEL กดปุ่ม ACC หรือแตะเบรก · กด <span class="mono">RES/+</span> เพื่อกลับไปใช้ความเร็วที่ตั้งไว้เดิม (แสดงเป็นสีเทาบนมาตรวัด)</p>
           <div class="warn"><b>ห้าม</b><span>ออกจากรถขณะ ACC หยุดรถให้อยู่ รถอาจเคลื่อนโดยไม่มีผู้ควบคุม · และห้ามใช้ ACC บนถนนที่รถเปลี่ยนเลนบ่อย รถคลานติดๆ ขัดๆ ถนนโค้งหักศอก หรือทางลงเนินชัน เพราะ ACC จะไม่เติมแรงเบรกให้คงความเร็วที่ตั้งไว้</span></div>
         </div>
